@@ -11,12 +11,15 @@
     <!-- Add Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <body class="theme-blue">
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">🌙</button>
     <button class="back-to-top" onclick="scrollToTop()" aria-label="Scroll to top">↑</button>
     
     <div class="search-container">
-      <input type="text" id="searchInput" placeholder="Search commands..." aria-label="Search git commands">
-      <button id="clearSearch" aria-label="Clear search"><i class="fas fa-times"></i></button>
+      <button id="searchToggle" aria-label="Toggle search"><i class="fas fa-search"></i></button>
+      <div class="search-wrapper">
+        <input type="text" id="searchInput" placeholder="Search commands..." aria-label="Search git commands">
+        <button id="clearSearch" aria-label="Clear search"><i class="fas fa-times"></i></button>
+      </div>
     </div>
 
     <div class="section-nav" aria-label="Section navigation">
