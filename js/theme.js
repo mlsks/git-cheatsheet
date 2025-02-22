@@ -1,4 +1,4 @@
-export class ThemeManager {
+class ThemeManager {
   constructor() {
     this.button = document.querySelector('.theme-toggle');
     this.init();

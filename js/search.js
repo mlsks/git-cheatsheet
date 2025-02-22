@@ -1,6 +1,16 @@
-import { debounce } from './utils.js';
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
 
-export class Search {
+class Search {
   constructor() {
     this.searchInput = document.getElementById('searchInput');
     this.clearSearch = document.getElementById('clearSearch');

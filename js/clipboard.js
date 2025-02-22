@@ -1,4 +1,4 @@
-export class Clipboard {
+class Clipboard {
   constructor() {
     this.init();
   }
