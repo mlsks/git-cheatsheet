@@ -1,12 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Git Commands Cheat Sheet</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
+  <body class="theme-blue">
+    <div class="theme-controls">
+      <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+      <select class="color-palette" onchange="changeColorTheme(this.value)">
+        <option value="theme-blue">Blue Theme</option>
+        <option value="theme-purple">Purple Theme</option>
+        <option value="theme-green">Green Theme</option>
+        <option value="theme-orange">Orange Theme</option>
+      </select>
+    </div>
+
     <h1>Git Commands Cheat Sheet</h1>
 
     <div class="command-section">
@@ -176,5 +186,24 @@
       <div class="command">git reset --hard origin/main</div>
       <div class="description">Reset to match remote branch exactly (Caution: destructive)</div>
     </div>
+
+    <script>
+      function toggleTheme() {
+        const html = document.documentElement;
+        const button = document.querySelector('.theme-toggle');
+        
+        if (html.getAttribute('data-theme') === 'dark') {
+          html.setAttribute('data-theme', 'light');
+          button.innerHTML = '🌙 Dark Mode';
+        } else {
+          html.setAttribute('data-theme', 'dark');
+          button.innerHTML = '☀️ Light Mode';
+        }
+      }
+
+      function changeColorTheme(theme) {
+        document.body.className = theme;
+      }
+    </script>
   </body>
 </html>
