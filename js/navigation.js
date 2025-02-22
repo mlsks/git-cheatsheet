@@ -28,9 +28,11 @@ class Navigation {
     this.prevIndicator.addEventListener("click", () => {
       const sections = Array.from(document.querySelectorAll("h2"));
       const currentPosition = window.scrollY + window.innerHeight / 3;
-      let currentSectionIndex = sections.findIndex((section) => section.offsetTop > currentPosition) - 1;
+      let currentSectionIndex =
+        sections.findIndex((section) => section.offsetTop > currentPosition) -
+        1;
       if (currentSectionIndex === -2) currentSectionIndex = sections.length - 1;
-      
+
       const targetSection = sections[Math.max(0, currentSectionIndex - 1)];
       if (targetSection) {
         targetSection.scrollIntoView({ behavior: "smooth" });
@@ -41,10 +43,13 @@ class Navigation {
     this.nextIndicator.addEventListener("click", () => {
       const sections = Array.from(document.querySelectorAll("h2"));
       const currentPosition = window.scrollY + window.innerHeight / 3;
-      let currentSectionIndex = sections.findIndex((section) => section.offsetTop > currentPosition) - 1;
+      let currentSectionIndex =
+        sections.findIndex((section) => section.offsetTop > currentPosition) -
+        1;
       if (currentSectionIndex === -2) currentSectionIndex = sections.length - 1;
-      
-      const targetSection = sections[Math.min(sections.length - 1, currentSectionIndex + 1)];
+
+      const targetSection =
+        sections[Math.min(sections.length - 1, currentSectionIndex + 1)];
       if (targetSection) {
         targetSection.scrollIntoView({ behavior: "smooth" });
         this.updateNavigationIndicators();
@@ -92,11 +97,18 @@ class Navigation {
     }, 2000);
   }
 
+  truncateText(text, maxChars = 21) {
+    if (text.length <= maxChars) {
+      return text;
+    }
+    return text.substring(0, maxChars) + '...';
+  }
+
   updatePrevIndicator(currentSectionIndex, sections) {
     if (currentSectionIndex > 0) {
       const prevSection = sections[currentSectionIndex - 1];
       this.prevIndicator.querySelector(".section-name").textContent =
-        prevSection.textContent;
+        this.truncateText(prevSection.textContent);
       this.prevIndicator.classList.add("visible");
     } else {
       this.prevIndicator.classList.remove("visible");
@@ -107,7 +119,7 @@ class Navigation {
     if (currentSectionIndex < sections.length - 1) {
       const nextSection = sections[currentSectionIndex + 1];
       this.nextIndicator.querySelector(".section-name").textContent =
-        nextSection.textContent;
+        this.truncateText(nextSection.textContent);
       this.nextIndicator.classList.add("visible");
     } else {
       this.nextIndicator.classList.remove("visible");
