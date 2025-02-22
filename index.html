@@ -37,6 +37,17 @@
     <div class="command-section">
       <h2>Most Frequently Used Commands</h2>
 
+      <div class="visual-diagram">
+        <pre class="ascii-art">
+   Working Directory    Staging Area    Local Repository    Remote Repository
+          ↓                 ↓                 ↓                   ↓
+     [Modified Files] → [Staged Files] → [Committed Files] → [Remote Files]
+          ↑                 ↑                 ↑                   ↑
+      git status          git add .       git commit -m       git push/pull
+        </pre>
+        <div class="diagram-description">Basic Git Workflow</div>
+      </div>
+
       <h3>Basic Commands</h3>
       <div class="command">git status</div>
       <div class="description">Check the status of your working directory (<span class="shortcut">Alt+Shift+S</span>)
@@ -81,6 +92,19 @@
 
     <div class="command-section">
       <h2>Branch Operations</h2>
+
+      <div class="visual-diagram">
+        <pre class="ascii-art">
+          main
+           ↓
+    o---o---o---o      ← Current Timeline
+            \
+             o---o     ← Feature Branch
+                 ↑
+              feature
+        </pre>
+        <div class="diagram-description">Branch Visualization</div>
+      </div>
 
       <div class="command">git branch</div>
       <div class="description">List all local branches (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Branch")</div>
@@ -150,6 +174,17 @@
     <div class="command-section">
       <h2>Stashing</h2>
 
+      <div class="visual-diagram">
+        <pre class="ascii-art">
+    Working Directory          Stash Stack
+           ↓                      ↓
+    [Modified Files]   →   [Stash@{0}] Newest
+                          [Stash@{1}]
+                          [Stash@{2}] Oldest
+        </pre>
+        <div class="diagram-description">Git Stash Stack Visualization</div>
+      </div>
+
       <div class="command">git stash</div>
       <div class="description">Temporarily store modified tracked files (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Stash")</div>
 
@@ -201,6 +236,19 @@
 
     <div class="command-section">
       <h2>Advanced Reset</h2>
+
+      <div class="visual-diagram">
+        <pre class="ascii-art">
+    HEAD~3    HEAD~2    HEAD~1     HEAD
+      ↓         ↓         ↓         ↓
+    o ← → o ← → o ← → o     Commit History
+    
+    --soft:   Move HEAD only
+    --mixed:  Move HEAD and reset staging
+    --hard:   Move HEAD, reset staging and working directory
+        </pre>
+        <div class="diagram-description">Git Reset Types Visualization</div>
+      </div>
 
       <div class="command">git reset --soft HEAD~1</div>
       <div class="description">Undo last commit, keep changes staged</div>
