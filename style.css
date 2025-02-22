@@ -105,6 +105,14 @@ body {
   box-shadow: var(--shadow-lg);
 }
 
+[data-theme="dark"] .theme-toggle {
+  background: #1976d2;
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+  background: #2196f3;
+}
+
 /* Search Container */
 .search-container {
   display: flex;
