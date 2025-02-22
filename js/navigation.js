@@ -24,6 +24,33 @@ class Navigation {
 
     document.addEventListener("keydown", (e) => this.handleKeyNavigation(e));
 
+    // Add click handlers for navigation indicators
+    this.prevIndicator.addEventListener("click", () => {
+      const sections = Array.from(document.querySelectorAll("h2"));
+      const currentPosition = window.scrollY + window.innerHeight / 3;
+      let currentSectionIndex = sections.findIndex((section) => section.offsetTop > currentPosition) - 1;
+      if (currentSectionIndex === -2) currentSectionIndex = sections.length - 1;
+      
+      const targetSection = sections[Math.max(0, currentSectionIndex - 1)];
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: "smooth" });
+        this.updateNavigationIndicators();
+      }
+    });
+
+    this.nextIndicator.addEventListener("click", () => {
+      const sections = Array.from(document.querySelectorAll("h2"));
+      const currentPosition = window.scrollY + window.innerHeight / 3;
+      let currentSectionIndex = sections.findIndex((section) => section.offsetTop > currentPosition) - 1;
+      if (currentSectionIndex === -2) currentSectionIndex = sections.length - 1;
+      
+      const targetSection = sections[Math.min(sections.length - 1, currentSectionIndex + 1)];
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: "smooth" });
+        this.updateNavigationIndicators();
+      }
+    });
+
     // Initial update
     this.updateNavigationIndicators();
   }

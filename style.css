@@ -295,9 +295,9 @@ h3 {
 
 /* Copy Button */
 .copy-btn {
-  background: var(--accent-primary);
+  background: transparent;
   border: none;
-  color: white;
+  color: var(--accent-primary);
   padding: var(--space-xs) var(--space-sm);
   border-radius: var(--radius-sm);
   cursor: pointer;
@@ -307,12 +307,12 @@ h3 {
 }
 
 .copy-btn:hover {
-  background: var(--accent-secondary);
+  color: var(--accent-secondary);
   transform: translateY(-1px);
 }
 
 .copy-btn.copied {
-  background: #4caf50;
+  color: #4caf50;
 }
 
 /* Visual Diagrams */
@@ -369,6 +369,7 @@ h3 {
   align-items: center;
   gap: var(--space-xs);
   box-shadow: var(--shadow-md);
+  cursor: pointer;
 }
 
 .nav-indicator.visible {
