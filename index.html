@@ -3,20 +3,140 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Task Tracker</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Git Commands Cheat Sheet</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      .command-section {
+        margin-bottom: 30px;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: #f5f5f5;
+      }
+      .command {
+        background-color: #e0e0e0;
+        padding: 8px;
+        border-radius: 4px;
+        font-family: monospace;
+        margin: 10px 0;
+      }
+      h2 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+      }
+      .description {
+        color: #555;
+        margin-bottom: 15px;
+      }
+    </style>
   </head>
   <body>
-    <div class="container">
-      <h1>Task Tracker</h1>
-      <ul id="tasks">
-        <li>Task 1</li>
-        <li>Task 2</li>
-        <li>Task 3</li>
-        <li>Task 4</li>
-      </ul>
+    <h1>Git Commands Cheat Sheet</h1>
+
+    <div class="command-section">
+      <h2>Most Frequently Used Commands</h2>
+
+      <h3>Basic Commands</h3>
+      <div class="command">git status</div>
+      <div class="description">Check the status of your working directory</div>
+
+      <div class="command">git add .</div>
+      <div class="description">Stage all changes for commit</div>
+
+      <div class="command">git commit -m "message"</div>
+      <div class="description">Commit staged changes with a message</div>
+
+      <div class="command">git pull</div>
+      <div class="description">
+        Fetch and merge changes from remote repository
+      </div>
+
+      <div class="command">git push</div>
+      <div class="description">Push commits to remote repository</div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="command-section">
+      <h2>Repository Setup</h2>
+
+      <div class="command">git init</div>
+      <div class="description">Initialize a new Git repository</div>
+
+      <div class="command">git clone [url]</div>
+      <div class="description">Clone a repository from remote source</div>
+    </div>
+
+    <div class="command-section">
+      <h2>Branch Operations</h2>
+
+      <div class="command">git branch</div>
+      <div class="description">List all local branches</div>
+
+      <div class="command">git branch [branch-name]</div>
+      <div class="description">Create a new branch</div>
+
+      <div class="command">git checkout [branch-name]</div>
+      <div class="description">Switch to specified branch</div>
+
+      <div class="command">git checkout -b [branch-name]</div>
+      <div class="description">Create and switch to new branch</div>
+
+      <div class="command">git merge [branch-name]</div>
+      <div class="description">Merge specified branch into current branch</div>
+    </div>
+
+    <div class="command-section">
+      <h2>History and Differences</h2>
+
+      <div class="command">git log</div>
+      <div class="description">View commit history</div>
+
+      <div class="command">git diff</div>
+      <div class="description">
+        Show changes between working directory and staging area
+      </div>
+
+      <div class="command">git diff --staged</div>
+      <div class="description">
+        Show changes between staging area and last commit
+      </div>
+    </div>
+
+    <div class="command-section">
+      <h2>Undoing Changes</h2>
+
+      <div class="command">git reset [file]</div>
+      <div class="description">
+        Unstage changes while preserving working directory
+      </div>
+
+      <div class="command">git checkout -- [file]</div>
+      <div class="description">Discard changes in working directory</div>
+
+      <div class="command">git revert [commit]</div>
+      <div class="description">
+        Create new commit that undoes changes from specified commit
+      </div>
+    </div>
+
+    <div class="command-section">
+      <h2>Remote Repository</h2>
+
+      <div class="command">git remote add origin [url]</div>
+      <div class="description">Add remote repository</div>
+
+      <div class="command">git remote -v</div>
+      <div class="description">List remote repositories</div>
+
+      <div class="command">git fetch</div>
+      <div class="description">
+        Download objects and refs from remote repository
+      </div>
+    </div>
   </body>
 </html>
