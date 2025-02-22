@@ -362,7 +362,7 @@ h3 {
   padding: var(--space-sm);
   border-radius: var(--radius-md);
   font-size: 0.9rem;
-  opacity: 0;
+  opacity: 0.2;
   transform: translateX(20px);
   transition: all var(--transition-normal);
   display: flex;
@@ -373,7 +373,7 @@ h3 {
 }
 
 .nav-indicator.visible {
-  opacity: 0.9;
+  opacity: 0.8;
   transform: translateX(0);
 }
 
