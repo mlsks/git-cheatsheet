@@ -70,11 +70,18 @@ body {
   width: 90%;
 }
 
-/* Theme Toggle */
-.theme-toggle {
+/* Button Wrapper */
+.button-wrapper {
   position: fixed;
   top: var(--space-md);
   right: var(--space-md);
+  z-index: 100;
+  display: flex;
+  gap: var(--space-sm);
+}
+
+/* Theme Toggle */
+.theme-toggle {
   background: var(--accent-primary);
   color: white;
   border: none;
@@ -87,7 +94,6 @@ body {
   font-size: 1.5rem;
   transition: all var(--transition-normal);
   box-shadow: var(--shadow-md);
-  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,10 +107,6 @@ body {
 
 /* Search Container */
 .search-container {
-  position: fixed;
-  top: var(--space-md);
-  right: calc(80px + var(--space-md));
-  z-index: 100;
   display: flex;
   align-items: center;
   gap: var(--space-xs);
@@ -124,7 +126,6 @@ body {
   font-size: 1.5rem;
   transition: all var(--transition-normal);
   box-shadow: var(--shadow-md);
-  z-index: 2;
 }
 
 #searchToggle:hover {
@@ -367,6 +368,31 @@ h3 {
   transform: translateX(0);
 }
 
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .button-wrapper {
+    position: static;
+    justify-content: center;
+    margin-bottom: 1rem;
+    padding-top: var(--space-md);
+  }
+
+  h1 {
+    padding-top: var(--space-md);
+  }
+
+  .search-wrapper {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    right: auto;
+  }
+
+  .search-wrapper.expanded {
+    width: 300px;
+  }
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   :root {
@@ -378,19 +404,7 @@ h3 {
     width: 95%;
   }
 
-  .theme-toggle {
-    top: var(--space-sm);
-    right: var(--space-sm);
-    width: 50px;
-    height: 50px;
-    font-size: 1.2rem;
-  }
-
-  .search-container {
-    top: var(--space-sm);
-    right: 70px;
-  }
-
+  .theme-toggle,
   #searchToggle {
     width: 50px;
     height: 50px;
@@ -398,13 +412,11 @@ h3 {
   }
 
   .search-wrapper.expanded {
-    width: calc(100vw - 140px);
-    right: 0;
+    width: calc(100vw - 40px);
   }
 
   h1 {
     font-size: 2rem;
-    padding-top: calc(var(--space-xl) + 40px);
   }
 
   .section-nav {
