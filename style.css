@@ -110,6 +110,33 @@ body {
   box-shadow: 0 4px 8px var(--shadow-color);
 }
 
+/* Keyboard Navigation Hint */
+.keyboard-hint {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-section);
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 4px var(--shadow-color);
+  opacity: 0.9;
+  z-index: 100;
+  animation: fadeIn 0.3s ease-in-out, fadeOut 0.3s ease-in-out 4s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, 20px); }
+  to { opacity: 0.9; transform: translate(-50%, 0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 0.9; transform: translate(-50%, 0); }
+  to { opacity: 0; transform: translate(-50%, 20px); visibility: hidden; }
+}
+
 h1 {
   color: var(--accent-primary);
   text-align: center;
