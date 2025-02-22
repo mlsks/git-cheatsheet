@@ -1,3 +1,16 @@
+// Debounce utility function
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
 // Search functionality
 const searchInput = document.getElementById('searchInput');
 const clearSearch = document.getElementById('clearSearch');
@@ -33,7 +46,10 @@ function performSearch() {
   });
 }
 
-searchInput.addEventListener('input', performSearch);
+// Debounce the search with a 300ms delay
+const debouncedSearch = debounce(performSearch, 300);
+searchInput.addEventListener('input', debouncedSearch);
+
 clearSearch.addEventListener('click', () => {
   searchInput.value = '';
   commandSections.forEach(section => {
