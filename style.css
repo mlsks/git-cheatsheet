@@ -40,6 +40,70 @@
   scroll-behavior: smooth;
 }
 
+/* Search Container */
+.search-container {
+  position: fixed;
+  top: 120px; /* Increased from 90px to 120px to create more space */
+  right: 20px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#searchInput {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 2px solid var(--accent-primary);
+  background: var(--bg-section);
+  color: var(--text-primary);
+  font-family: 'Poppins', sans-serif;
+  width: 250px;
+  font-size: 1rem;
+}
+
+#searchInput:focus {
+  outline: none;
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+#clearSearch {
+  background: var(--accent-primary);
+  border: none;
+  color: white;
+  padding: 0.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#clearSearch:hover {
+  background: var(--accent-secondary);
+}
+
+/* Copy Button */
+.copy-btn {
+  background: var(--accent-primary);
+  border: none;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.copy-btn:hover {
+  background: var(--accent-secondary);
+  transform: translateY(-1px);
+}
+
+.copy-btn.copied {
+  background: #4caf50;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   line-height: 1.6;

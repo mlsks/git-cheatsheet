@@ -1,3 +1,71 @@
+// Search functionality
+const searchInput = document.getElementById('searchInput');
+const clearSearch = document.getElementById('clearSearch');
+const commandSections = document.querySelectorAll('.command-section');
+
+function performSearch() {
+  const searchTerm = searchInput.value.toLowerCase();
+  
+  commandSections.forEach(section => {
+    const commands = section.querySelectorAll('.command');
+    let hasMatch = false;
+    
+    commands.forEach(command => {
+      const commandText = command.textContent.toLowerCase();
+      const description = command.nextElementSibling;
+      
+      if (commandText.includes(searchTerm)) {
+        command.style.display = 'block';
+        description.style.display = 'block';
+        hasMatch = true;
+      } else {
+        command.style.display = 'none';
+        description.style.display = 'none';
+      }
+    });
+    
+    // Show/hide sections based on matches
+    section.style.display = hasMatch ? 'block' : 'none';
+    const sectionTitle = section.querySelector('h2');
+    if (sectionTitle) {
+      sectionTitle.style.display = hasMatch ? 'block' : 'none';
+    }
+  });
+}
+
+searchInput.addEventListener('input', performSearch);
+clearSearch.addEventListener('click', () => {
+  searchInput.value = '';
+  commandSections.forEach(section => {
+    section.style.display = 'block';
+    const elements = section.querySelectorAll('.command, .description, h2');
+    elements.forEach(el => el.style.display = 'block');
+  });
+});
+
+// Copy to clipboard functionality
+document.querySelectorAll('.copy-btn').forEach(button => {
+  button.addEventListener('click', async () => {
+    const command = button.parentElement.previousElementSibling.textContent;
+    
+    try {
+      await navigator.clipboard.writeText(command);
+      
+      // Visual feedback
+      button.classList.add('copied');
+      button.innerHTML = '<i class="fas fa-check"></i>';
+      
+      setTimeout(() => {
+        button.classList.remove('copied');
+        button.innerHTML = '<i class="fas fa-copy"></i>';
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  });
+});
+
+// Theme toggle functionality
 function toggleTheme() {
   const html = document.documentElement;
   const button = document.querySelector('.theme-toggle');

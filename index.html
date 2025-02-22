@@ -3,14 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A comprehensive Git commands cheat sheet with keyboard shortcuts, dark mode, and easy navigation. Learn and reference common Git operations." />
+    <meta name="keywords" content="git, commands, cheat sheet, git tutorial, version control, git basics, git guide, git reference" />
     <title>Git Commands Cheat Sheet</title>
     <link rel="stylesheet" href="style.css" />
-  </head>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>" />
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <body class="theme-blue">
-    <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
-    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+    <button class="back-to-top" onclick="scrollToTop()" aria-label="Scroll to top">↑</button>
     
-    <div class="section-nav">
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search commands..." aria-label="Search git commands">
+      <button id="clearSearch" aria-label="Clear search"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="section-nav" aria-label="Section navigation">
       <div class="nav-indicator prev">
         <span class="arrow">↑</span>
         <span class="section-name"></span>
@@ -30,24 +39,34 @@
 
       <h3>Basic Commands</h3>
       <div class="command">git status</div>
-      <div class="description">Check the status of your working directory (<span class="shortcut">Alt+Shift+S</span>)</div>
+      <div class="description">Check the status of your working directory (<span class="shortcut">Alt+Shift+S</span>)
+        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+      </div>
 
       <div class="command">git add .</div>
-      <div class="description">Stage all changes for commit (<span class="shortcut">Ctrl+Shift+G</span> then <span class="shortcut">A</span>)</div>
+      <div class="description">Stage all changes for commit (<span class="shortcut">Ctrl+Shift+G</span> then <span class="shortcut">A</span>)
+        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+      </div>
 
       <div class="command">git commit -m "message"</div>
-      <div class="description">Commit staged changes with a message (<span class="shortcut">Ctrl+Enter</span> after typing message)</div>
+      <div class="description">Commit staged changes with a message (<span class="shortcut">Ctrl+Enter</span> after typing message)
+        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+      </div>
 
       <div class="command">git commit -am "message"</div>
-      <div class="description">Stage and commit all tracked files with a message (combines git add and commit for modified files)</div>
+      <div class="description">Stage and commit all tracked files with a message (combines git add and commit for modified files)
+        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+      </div>
 
       <div class="command">git pull</div>
-      <div class="description">
-        Fetch and merge changes from remote repository (<span class="shortcut">Alt+P</span>)
+      <div class="description">Fetch and merge changes from remote repository (<span class="shortcut">Alt+P</span>)
+        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
       </div>
 
       <div class="command">git push</div>
-      <div class="description">Push commits to remote repository (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Push")</div>
+      <div class="description">Push commits to remote repository (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Push")
+        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+      </div>
     </div>
 
     <div class="command-section">
