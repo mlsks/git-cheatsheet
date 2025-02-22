@@ -9,6 +9,20 @@
   <body class="theme-blue">
     <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
     <button class="back-to-top" onclick="scrollToTop()">↑</button>
+    
+    <div class="section-nav">
+      <div class="nav-indicator prev">
+        <span class="arrow">↑</span>
+        <span class="section-name"></span>
+        <span class="key-hint">PgUp</span>
+      </div>
+      <div class="nav-indicator next">
+        <span class="arrow">↓</span>
+        <span class="section-name"></span>
+        <span class="key-hint">PgDn</span>
+      </div>
+    </div>
+
     <h1>Git Commands Cheat Sheet</h1>
 
     <div class="command-section">
@@ -179,77 +193,6 @@
       <div class="description">Reset to match remote branch exactly (Caution: destructive)</div>
     </div>
 
-    <script>
-      function toggleTheme() {
-        const html = document.documentElement;
-        const button = document.querySelector('.theme-toggle');
-        
-        if (html.getAttribute('data-theme') === 'dark') {
-          html.setAttribute('data-theme', 'light');
-          button.innerHTML = '🌙 Dark Mode';
-        } else {
-          html.setAttribute('data-theme', 'dark');
-          button.innerHTML = '☀️ Light Mode';
-        }
-      }
-
-      // Back to top functionality
-      const backToTopButton = document.querySelector('.back-to-top');
-      
-      window.addEventListener('scroll', () => {
-        if (window.pageYOffset > 300) {
-          backToTopButton.classList.add('visible');
-        } else {
-          backToTopButton.classList.remove('visible');
-        }
-      });
-
-      function scrollToTop() {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      }
-
-      // Section Navigation
-      document.addEventListener('keydown', (e) => {
-        const sections = Array.from(document.querySelectorAll('h2'));
-        const currentPosition = window.scrollY + window.innerHeight / 3;
-        
-        // Find current section
-        let currentSectionIndex = sections.findIndex(section => 
-          section.offsetTop > currentPosition
-        ) - 1;
-        
-        // If no section found after current position, we're at the last section
-        if (currentSectionIndex === -2) {
-          currentSectionIndex = sections.length - 1;
-        }
-
-        // Page Up: Go to previous section
-        if (e.key === 'PageUp') {
-          e.preventDefault();
-          const targetSection = sections[Math.max(0, currentSectionIndex - 1)];
-          if (targetSection) {
-            targetSection.scrollIntoView({ behavior: 'smooth' });
-          }
-        }
-        
-        // Page Down: Go to next section
-        if (e.key === 'PageDown') {
-          e.preventDefault();
-          const targetSection = sections[Math.min(sections.length - 1, currentSectionIndex + 1)];
-          if (targetSection) {
-            targetSection.scrollIntoView({ behavior: 'smooth' });
-          }
-        }
-      });
-
-      // Add keyboard shortcut hint
-      const keyboardHint = document.createElement('div');
-      keyboardHint.className = 'keyboard-hint';
-      keyboardHint.innerHTML = 'Use Page Up/Down to navigate between sections';
-      document.body.appendChild(keyboardHint);
-    </script>
+    <script src="script.js" defer></script>
   </body>
 </html>
