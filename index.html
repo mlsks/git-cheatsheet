@@ -7,16 +7,8 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="theme-blue">
-    <div class="theme-controls">
-      <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
-      <select class="color-palette" onchange="changeColorTheme(this.value)">
-        <option value="theme-blue">Blue Theme</option>
-        <option value="theme-purple">Purple Theme</option>
-        <option value="theme-green">Green Theme</option>
-        <option value="theme-orange">Orange Theme</option>
-      </select>
-    </div>
-
+    <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark Mode</button>
+    <button class="back-to-top" onclick="scrollToTop()">↑</button>
     <h1>Git Commands Cheat Sheet</h1>
 
     <div class="command-section">
@@ -201,8 +193,22 @@
         }
       }
 
-      function changeColorTheme(theme) {
-        document.body.className = theme;
+      // Back to top functionality
+      const backToTopButton = document.querySelector('.back-to-top');
+      
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) { // Show button after scrolling 300px
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
+      });
+
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
       }
     </script>
   </body>
