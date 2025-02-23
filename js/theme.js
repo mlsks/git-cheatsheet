@@ -1,22 +1,22 @@
-class ThemeManager {
-  constructor() {
-    this.button = document.querySelector('.theme-toggle');
-    this.init();
-  }
-
-  init() {
-    this.button.addEventListener('click', () => this.toggleTheme());
-  }
-
-  toggleTheme() {
+function applyTheme(theme) {
     const html = document.documentElement;
+    const themeButton = document.querySelector('.theme-toggle');
     
-    if (html.getAttribute('data-theme') === 'dark') {
-      html.setAttribute('data-theme', 'light');
-      this.button.innerHTML = '🌙';
-    } else {
-      html.setAttribute('data-theme', 'dark');
-      this.button.innerHTML = '☀️';
+    html.setAttribute('data-theme', theme);
+    if (themeButton) {
+        themeButton.innerHTML = theme === 'dark' ? '☀️' : '🌙';
     }
-  }
+    localStorage.setItem('theme', theme);
 }
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(newTheme);
+}
+
+// Apply initial theme on load
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    applyTheme(savedTheme);
+});

@@ -1,11 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Documentation</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        .theme-toggle {
+            position: fixed;
+            top: var(--space-md);
+            right: var(--space-md);
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-md);
+            z-index: 1002;
+            transition: all var(--transition-normal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
         .back-link {
             position: fixed;
             top: var(--space-md);
@@ -154,8 +180,9 @@
         }
     </style>
 </head>
-<body>
+<body class="theme-blue">
     <a href="index.html" class="back-link">← Back to Cheat Sheet</a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">🌙</button>
     <div class="doc-container">
         <nav class="doc-sidebar">
             <ul class="doc-nav">
@@ -295,11 +322,16 @@
         </main>
     </div>
 
+    <script src="js/theme.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('.doc-nav a');
             const menuToggle = document.querySelector('.menu-toggle');
             const sidebar = document.querySelector('.doc-sidebar');
+            
+            // Apply initial theme
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
             
             // Navigation
             navLinks.forEach(link => {
@@ -342,6 +374,13 @@
             
             window.addEventListener('resize', updateMenuToggleVisibility);
             updateMenuToggleVisibility();
+
+            // Listen for theme changes
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'theme') {
+                    applyTheme(e.newValue);
+                }
+            });
         });
     </script>
 </body>

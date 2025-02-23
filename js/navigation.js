@@ -143,6 +143,10 @@ class Navigation {
       if (targetSection) {
         targetSection.scrollIntoView({ behavior: "smooth" });
         this.updateNavigationIndicators();
+        this.prevIndicator.style.opacity = "1";
+        setTimeout(() => {
+          this.prevIndicator.style.opacity = "";
+        }, 2000);
       }
     }
 
@@ -153,6 +157,10 @@ class Navigation {
       if (targetSection) {
         targetSection.scrollIntoView({ behavior: "smooth" });
         this.updateNavigationIndicators();
+        this.nextIndicator.style.opacity = "1";
+        setTimeout(() => {
+          this.nextIndicator.style.opacity = "";
+        }, 2000);
       }
     }
   }
