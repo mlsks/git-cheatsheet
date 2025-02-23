@@ -1,403 +1,184 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Documentation</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .theme-toggle {
-            position: fixed;
-            top: var(--space-md);
-            right: var(--space-md);
-            background: var(--accent-primary);
-            color: white;
-            border: none;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            box-shadow: var(--shadow-md);
-            z-index: 1002;
-            transition: all var(--transition-normal);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .theme-toggle:hover {
-            background: var(--accent-secondary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .back-link {
-            position: fixed;
-            top: var(--space-md);
-            right: calc(var(--space-md) + 55px);
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: var(--accent-primary);
-            box-shadow: var(--shadow-md);
-            z-index: 1002;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            border: 2px solid transparent;
-            backdrop-filter: blur(5px);
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1;
-            padding-bottom: 0.15em;
-            padding-right: 0.1em;
-        }
-
-        .back-link:hover {
-            color: var(--accent-primary);
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: var(--shadow-lg);
-            background: var(--bg-section);
-            border-color: var(--accent-primary);
-        }
-
-        .back-link:active {
-            transform: translateY(0) scale(0.95);
-        }
-
-        @media (max-width: 768px) {
-            .back-link {
-                top: var(--space-sm);
-                right: calc(var(--space-sm) + 55px);
-            }
-        }
-
-        .doc-container {
-            display: flex;
-            min-height: 100vh;
-        }
-        
-        .doc-sidebar {
-            width: 250px;
-            background: var(--bg-section);
-            padding: var(--space-md);
-            border-right: 1px solid var(--border-color);
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-        }
-        
-        .doc-content {
-            flex: 1;
-            padding: var(--space-lg);
-            margin-left: 250px;
-        }
-        
-        .doc-nav {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .doc-nav li {
-            margin-bottom: var(--space-sm);
-        }
-        
-        .doc-nav a {
-            color: var(--text-primary);
-            text-decoration: none;
-            display: block;
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: var(--radius-sm);
-            transition: all var(--transition-normal);
-        }
-        
-        .doc-nav a:hover {
-            background: var(--bg-primary);
-            color: var(--accent-primary);
-        }
-        
-        .doc-nav a.active {
-            background: var(--accent-primary);
-            color: white;
-        }
-        
-        .doc-section {
-            margin-bottom: var(--space-xl);
-            display: none;
-        }
-        
-        .doc-section.active {
-            display: block;
-        }
-        
-        .doc-section h1 {
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: var(--space-sm);
-            margin-bottom: var(--space-lg);
-        }
-        
-        .doc-section h2 {
-            margin-top: var(--space-xl);
-        }
-        
-        .doc-section p {
-            margin-bottom: var(--space-md);
-            line-height: 1.8;
-        }
-        
-        .doc-section ul,
-        .doc-section ol {
-            margin-bottom: var(--space-md);
-            padding-left: var(--space-lg);
-        }
-        
-        .doc-section code {
-            background: var(--command-bg);
-            padding: 0.2em 0.4em;
-            border-radius: var(--radius-sm);
-            font-family: monospace;
-        }
-        
-        .doc-section pre {
-            background: var(--command-bg);
-            padding: var(--space-md);
-            border-radius: var(--radius-md);
-            overflow-x: auto;
-            margin: var(--space-md) 0;
-        }
-        
-        @media (max-width: 768px) {
-            .doc-sidebar {
-                transform: translateX(-100%);
-                transition: transform var(--transition-normal);
-                z-index: 1000;
-            }
-            
-            .doc-sidebar.active {
-                transform: translateX(0);
-            }
-            
-            .doc-content {
-                margin-left: 0;
-            }
-            
-            .menu-toggle {
-                display: block;
-                position: fixed;
-                left: var(--space-sm);
-                top: var(--space-sm);
-                z-index: 1001;
-            }
-        }
-    </style>
-</head>
-<body class="theme-blue">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="documentation.css" />
+  </head>
+  <body class="theme-blue">
     <a href="index.html" class="back-link" aria-label="Back to home">◀</a>
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">🌙</button>
+    <button
+      class="theme-toggle"
+      onclick="toggleTheme()"
+      aria-label="Toggle dark mode"
+    >
+      🌙
+    </button>
     <div class="doc-container">
-        <nav class="doc-sidebar">
-            <ul class="doc-nav">
-                <li><a href="#index" class="active">Overview</a></li>
-                <li><a href="#app-explanation">App Explanation</a></li>
-                <li><a href="#main">Main Features</a></li>
-                <li><a href="#clipboard">Clipboard</a></li>
-                <li><a href="#navigation">Navigation</a></li>
-                <li><a href="#search">Search</a></li>
-                <li><a href="#theme">Theme</a></li>
-                <li><a href="#utils">Utilities</a></li>
-            </ul>
-        </nav>
-        
-        <main class="doc-content">
-            <button class="menu-toggle" style="display: none;">☰</button>
-            
-            <section id="index" class="doc-section active">
-                <h1>Git Commands Cheat Sheet Documentation</h1>
-                <p>Welcome to the documentation for the Git Commands Cheat Sheet. This guide will help you understand how to use the application effectively and make the most of its features.</p>
-                
-                <h2>Quick Start</h2>
-                <ul>
-                    <li>Use the search feature to quickly find specific Git commands</li>
-                    <li>Toggle dark/light mode with the moon icon</li>
-                    <li>Copy commands with one click using the copy button</li>
-                    <li>Navigate between sections using keyboard shortcuts or scroll</li>
-                </ul>
-            </section>
-            
-            <section id="app-explanation" class="doc-section">
-                <h1>Application Overview</h1>
-                <p>The Git Commands Cheat Sheet is a comprehensive reference tool designed to help developers quickly access common Git commands and their explanations.</p>
-                
-                <h2>Key Features</h2>
-                <ul>
-                    <li>Organized command sections</li>
-                    <li>Visual diagrams for better understanding</li>
-                    <li>Keyboard shortcuts support</li>
-                    <li>Dark/light theme toggle</li>
-                    <li>Responsive design for all devices</li>
-                </ul>
-            </section>
-            
-            <section id="main" class="doc-section">
-                <h1>Main Features</h1>
-                <h2>Command Organization</h2>
-                <p>Commands are organized into logical sections:</p>
-                <ul>
-                    <li>Most Frequently Used Commands</li>
-                    <li>Repository Setup</li>
-                    <li>Branch Operations</li>
-                    <li>History and Differences</li>
-                    <li>Undoing Changes</li>
-                    <li>Remote Repository</li>
-                    <li>Stashing</li>
-                    <li>Tags</li>
-                    <li>Advanced Features</li>
-                </ul>
+      <nav class="doc-sidebar">
+        <ul class="doc-nav">
+          <li><a href="#index" class="active">Overview</a></li>
+          <li><a href="#app-explanation">App Explanation</a></li>
+          <li><a href="#main">Main Features</a></li>
+          <li><a href="#clipboard">Clipboard</a></li>
+          <li><a href="#navigation">Navigation</a></li>
+          <li><a href="#search">Search</a></li>
+          <li><a href="#theme">Theme</a></li>
+          <li><a href="#utils">Utilities</a></li>
+        </ul>
+      </nav>
 
-                <h2>Visual Diagrams</h2>
-                <p>ASCII diagrams help visualize Git concepts and workflows for better understanding.</p>
-            </section>
-            
-            <section id="clipboard" class="doc-section">
-                <h1>Clipboard Functionality</h1>
-                <p>Each command comes with a copy button for easy copying to clipboard.</p>
-                
-                <h2>How to Use</h2>
-                <ol>
-                    <li>Click the copy icon next to any command</li>
-                    <li>The command is copied to your clipboard</li>
-                    <li>A visual feedback indicates successful copying</li>
-                </ol>
-            </section>
-            
-            <section id="navigation" class="doc-section">
-                <h1>Navigation Features</h1>
-                <h2>Keyboard Shortcuts</h2>
-                <ul>
-                    <li>PgUp/PgDn: Navigate between sections</li>
-                    <li>Arrow indicators show previous/next sections</li>
-                </ul>
-                
-                <h2>Section Navigation</h2>
-                <p>Visual indicators on the right show your current position and available navigation options.</p>
-            </section>
-            
-            <section id="search" class="doc-section">
-                <h1>Search Functionality</h1>
-                <h2>Using Search</h2>
-                <ol>
-                    <li>Click the search icon or use keyboard shortcut</li>
-                    <li>Type your search query</li>
-                    <li>Results are filtered in real-time</li>
-                    <li>Clear search using the X button</li>
-                </ol>
-                
-                <h2>Search Tips</h2>
-                <ul>
-                    <li>Search works across all command sections</li>
-                    <li>Matches command names and descriptions</li>
-                    <li>Case-insensitive search</li>
-                </ul>
-            </section>
-            
-            <section id="theme" class="doc-section">
-                <h1>Theme Settings</h1>
-                <h2>Theme Toggle</h2>
-                <p>Switch between light and dark themes using the moon icon in the top-right corner.</p>
-                
-                <h2>Theme Features</h2>
-                <ul>
-                    <li>Automatic system preference detection</li>
-                    <li>Persistent theme selection</li>
-                    <li>Optimized colors for both themes</li>
-                    <li>Smooth transition animations</li>
-                </ul>
-            </section>
-            
-            <section id="utils" class="doc-section">
-                <h1>Additional Utilities</h1>
-                <h2>Keyboard Shortcuts Reference</h2>
-                <ul>
-                    <li>Search: Ctrl/Cmd + F</li>
-                    <li>Navigation: PgUp/PgDn</li>
-                    <li>Copy: Click copy button</li>
-                </ul>
-                
-                <h2>Mobile Features</h2>
-                <ul>
-                    <li>Responsive design</li>
-                    <li>Touch-friendly interface</li>
-                    <li>Mobile-optimized navigation</li>
-                </ul>
-            </section>
-        </main>
+      <main class="doc-content">
+        <button class="menu-toggle" style="display: none">☰</button>
+
+        <section id="index" class="doc-section active">
+          <h1>Git Commands Cheat Sheet Documentation</h1>
+          <p>
+            Welcome to the documentation for the Git Commands Cheat Sheet. This
+            guide will help you understand how to use the application
+            effectively and make the most of its features.
+          </p>
+
+          <h2>Quick Start</h2>
+          <ul>
+            <li>
+              Use the search feature to quickly find specific Git commands
+            </li>
+            <li>Toggle dark/light mode with the moon icon</li>
+            <li>Copy commands with one click using the copy button</li>
+            <li>
+              Navigate between sections using keyboard shortcuts or scroll
+            </li>
+          </ul>
+        </section>
+
+        <section id="app-explanation" class="doc-section">
+          <h1>Application Overview</h1>
+          <p>
+            The Git Commands Cheat Sheet is a comprehensive reference tool
+            designed to help developers quickly access common Git commands and
+            their explanations.
+          </p>
+
+          <h2>Key Features</h2>
+          <ul>
+            <li>Organized command sections</li>
+            <li>Visual diagrams for better understanding</li>
+            <li>Keyboard shortcuts support</li>
+            <li>Dark/light theme toggle</li>
+            <li>Responsive design for all devices</li>
+          </ul>
+        </section>
+
+        <section id="main" class="doc-section">
+          <h1>Main Features</h1>
+          <h2>Command Organization</h2>
+          <p>Commands are organized into logical sections:</p>
+          <ul>
+            <li>Most Frequently Used Commands</li>
+            <li>Repository Setup</li>
+            <li>Branch Operations</li>
+            <li>History and Differences</li>
+            <li>Undoing Changes</li>
+            <li>Remote Repository</li>
+            <li>Stashing</li>
+            <li>Tags</li>
+            <li>Advanced Features</li>
+          </ul>
+
+          <h2>Visual Diagrams</h2>
+          <p>
+            ASCII diagrams help visualize Git concepts and workflows for better
+            understanding.
+          </p>
+        </section>
+
+        <section id="clipboard" class="doc-section">
+          <h1>Clipboard Functionality</h1>
+          <p>
+            Each command comes with a copy button for easy copying to clipboard.
+          </p>
+
+          <h2>How to Use</h2>
+          <ol>
+            <li>Click the copy icon next to any command</li>
+            <li>The command is copied to your clipboard</li>
+            <li>A visual feedback indicates successful copying</li>
+          </ol>
+        </section>
+
+        <section id="navigation" class="doc-section">
+          <h1>Navigation Features</h1>
+          <h2>Keyboard Shortcuts</h2>
+          <ul>
+            <li>PgUp/PgDn: Navigate between sections</li>
+            <li>Arrow indicators show previous/next sections</li>
+          </ul>
+
+          <h2>Section Navigation</h2>
+          <p>
+            Visual indicators on the right show your current position and
+            available navigation options.
+          </p>
+        </section>
+
+        <section id="search" class="doc-section">
+          <h1>Search Functionality</h1>
+          <h2>Using Search</h2>
+          <ol>
+            <li>Click the search icon or use keyboard shortcut</li>
+            <li>Type your search query</li>
+            <li>Results are filtered in real-time</li>
+            <li>Clear search using the X button</li>
+          </ol>
+
+          <h2>Search Tips</h2>
+          <ul>
+            <li>Search works across all command sections</li>
+            <li>Matches command names and descriptions</li>
+            <li>Case-insensitive search</li>
+          </ul>
+        </section>
+
+        <section id="theme" class="doc-section">
+          <h1>Theme Settings</h1>
+          <h2>Theme Toggle</h2>
+          <p>
+            Switch between light and dark themes using the moon icon in the
+            top-right corner.
+          </p>
+
+          <h2>Theme Features</h2>
+          <ul>
+            <li>Automatic system preference detection</li>
+            <li>Persistent theme selection</li>
+            <li>Optimized colors for both themes</li>
+            <li>Smooth transition animations</li>
+          </ul>
+        </section>
+
+        <section id="utils" class="doc-section">
+          <h1>Additional Utilities</h1>
+          <h2>Keyboard Shortcuts Reference</h2>
+          <ul>
+            <li>Search: Ctrl/Cmd + F</li>
+            <li>Navigation: PgUp/PgDn</li>
+            <li>Copy: Click copy button</li>
+          </ul>
+
+          <h2>Mobile Features</h2>
+          <ul>
+            <li>Responsive design</li>
+            <li>Touch-friendly interface</li>
+            <li>Mobile-optimized navigation</li>
+          </ul>
+        </section>
+      </main>
     </div>
 
     <script src="js/theme.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.doc-nav a');
-            const menuToggle = document.querySelector('.menu-toggle');
-            const sidebar = document.querySelector('.doc-sidebar');
-            
-            // Apply initial theme
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            
-            // Navigation
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = link.getAttribute('href').substring(1);
-                    
-                    // Update active states
-                    document.querySelectorAll('.doc-section').forEach(section => {
-                        section.classList.remove('active');
-                    });
-                    document.querySelector(`#${targetId}`).classList.add('active');
-                    
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    link.classList.add('active');
-                    
-                    // Close mobile menu
-                    if (window.innerWidth <= 768) {
-                        sidebar.classList.remove('active');
-                    }
-                });
-            });
-            
-            // Mobile menu toggle
-            menuToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('active');
-            });
-            
-            // Close mobile menu on window resize
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 768) {
-                    sidebar.classList.remove('active');
-                }
-            });
-            
-            // Show/hide menu toggle based on screen size
-            function updateMenuToggleVisibility() {
-                menuToggle.style.display = window.innerWidth <= 768 ? 'block' : 'none';
-            }
-            
-            window.addEventListener('resize', updateMenuToggleVisibility);
-            updateMenuToggleVisibility();
-
-            // Listen for theme changes
-            window.addEventListener('storage', function(e) {
-                if (e.key === 'theme') {
-                    applyTheme(e.newValue);
-                }
-            });
-        });
-    </script>
-</body>
+    <script src="js/documentation.js"></script>
+  </body>
 </html>
