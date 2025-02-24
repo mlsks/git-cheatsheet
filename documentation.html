@@ -93,6 +93,66 @@
             ASCII diagrams help visualize Git concepts and workflows for better
             understanding.
           </p>
+
+          <h2>Core Application Structure</h2>
+          <p>The application is built with a modular architecture that ensures maintainability and performance:</p>
+          
+          <pre><code class="language-javascript">
+// Application Initialization
+document.addEventListener('DOMContentLoaded', () => {
+    initializeApplication();
+});
+
+const initializeApplication = () => {
+    setupEventListeners();
+    initializeModules();
+    checkInitialState();
+};
+
+// Module Management
+const initializeModules = () => {
+    ThemeManager.initialize();
+    Navigation.setup();
+    Search.init();
+    ClipboardManager.init();
+};
+          </code></pre>
+
+          <h2>State Management</h2>
+          <p>The application uses a centralized state management system:</p>
+          
+          <pre><code class="language-javascript">
+const ApplicationState = {
+    currentTheme: 'light',
+    isNavigationOpen: false,
+    activeSection: null,
+    searchQuery: '',
+    
+    updateState(key, value) {
+        this[key] = value;
+        this.notifyStateChange(key);
+    }
+};
+          </code></pre>
+
+          <h2>Performance Optimization</h2>
+          <p>Built-in performance utilities ensure smooth operation:</p>
+          
+          <pre><code class="language-javascript">
+const optimizePerformance = {
+    debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+};
+          </code></pre>
         </section>
 
         <section id="clipboard" class="doc-section">
@@ -107,6 +167,76 @@
             <li>The command is copied to your clipboard</li>
             <li>A visual feedback indicates successful copying</li>
           </ol>
+
+          <h2>Implementation Details</h2>
+          <p>The clipboard functionality is implemented using the modern Clipboard API with fallback support:</p>
+
+          <h3>Copy Button Creation</h3>
+          <pre><code class="language-javascript">
+const createCopyButton = (codeBlock) => {
+    const button = document.createElement('button');
+    button.className = 'copy-button';
+    button.innerHTML = 'Copy';
+    return button;
+};
+          </code></pre>
+
+          <h3>Core Copy Functionality</h3>
+          <p>The copying process is handled by an async function that provides visual feedback:</p>
+          
+          <pre><code class="language-javascript">
+const copyCode = async (block, button) => {
+    let code = block.querySelector('code');
+    let text = code ? code.innerText : block.innerText;
+    
+    try {
+        await navigator.clipboard.writeText(text);
+        button.innerHTML = 'Copied!';
+        setTimeout(() => {
+            button.innerHTML = 'Copy';
+        }, 2000);
+    } catch (err) {
+        console.error('Failed to copy:', err);
+        button.innerHTML = 'Error!';
+    }
+};
+          </code></pre>
+
+          <h3>Automatic Initialization</h3>
+          <p>The clipboard functionality is automatically initialized for all code blocks:</p>
+          
+          <pre><code class="language-javascript">
+const initializeCodeBlocks = () => {
+    const codeBlocks = document.querySelectorAll('pre');
+    
+    codeBlocks.forEach(block => {
+        const copyButton = createCopyButton(block);
+        block.appendChild(copyButton);
+        
+        copyButton.addEventListener('click', () => {
+            copyCode(block, copyButton);
+        });
+    });
+};
+          </code></pre>
+
+          <h2>Features</h2>
+          <ul>
+            <li>Modern Clipboard API support</li>
+            <li>Visual feedback for copy operations</li>
+            <li>Error handling with user feedback</li>
+            <li>Automatic button creation</li>
+            <li>Responsive design support</li>
+          </ul>
+
+          <h2>Technical Notes</h2>
+          <ul>
+            <li>Uses async/await for modern browsers</li>
+            <li>Provides clear visual feedback states</li>
+            <li>Handles errors gracefully</li>
+            <li>Automatically reverts button state</li>
+            <li>Works with both code blocks and plain text</li>
+          </ul>
         </section>
 
         <section id="navigation" class="doc-section">
@@ -122,6 +252,119 @@
             Visual indicators on the right show your current position and
             available navigation options.
           </p>
+
+          <h2>Core Navigation Structure</h2>
+          <p>The navigation system is built with a comprehensive object-oriented approach:</p>
+          
+          <pre><code class="language-javascript">
+const Navigation = {
+    nav: document.querySelector('.main-navigation'),
+    menuToggle: document.querySelector('.menu-toggle'),
+    navItems: document.querySelectorAll('.nav-item'),
+    activeClass: 'active',
+    mobileBreakpoint: 768
+};
+          </code></pre>
+
+          <h2>Smooth Scrolling Implementation</h2>
+          <p>Smooth scrolling between sections is handled by a dedicated function:</p>
+          
+          <pre><code class="language-javascript">
+const smoothScroll = (target) => {
+    const targetElement = document.querySelector(target);
+    if (!targetElement) return;
+
+    const targetPosition = targetElement.offsetTop;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    
+    window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+    });
+};
+          </code></pre>
+
+          <h2>Active State Management</h2>
+          <p>The system automatically tracks and updates the active section:</p>
+          
+          <pre><code class="language-javascript">
+const updateActiveState = () => {
+    const scrollPosition = window.scrollY;
+    
+    Navigation.navItems.forEach(item => {
+        const target = document.querySelector(item.getAttribute('href'));
+        if (!target) return;
+        
+        const targetPosition = target.offsetTop;
+        const targetHeight = target.offsetHeight;
+        
+        if (scrollPosition >= targetPosition - 100 && 
+            scrollPosition < targetPosition + targetHeight - 100) {
+            removeAllActiveStates();
+            item.classList.add(Navigation.activeClass);
+        }
+    });
+};
+          </code></pre>
+
+          <h2>Mobile Navigation</h2>
+          <p>Special handling for mobile devices ensures a responsive experience:</p>
+          
+          <pre><code class="language-javascript">
+const handleMobileNavigation = () => {
+    const isMobile = window.innerWidth < Navigation.mobileBreakpoint;
+    
+    if (isMobile) {
+        Navigation.menuToggle.addEventListener('click', toggleMobileMenu);
+        setupMobileInteractions();
+    } else {
+        Navigation.menuToggle.removeEventListener('click', toggleMobileMenu);
+        cleanupMobileInteractions();
+    }
+};
+          </code></pre>
+
+          <h2>Performance Optimization</h2>
+          <p>Event handling is optimized using debouncing techniques:</p>
+          
+          <pre><code class="language-javascript">
+const debounce = (func, wait) => {
+    let timeout;
+    return function(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+};
+
+// Usage in scroll handling
+window.addEventListener('scroll', 
+    debounce(updateActiveState, 100)
+);
+          </code></pre>
+
+          <h2>Key Features</h2>
+          <ul>
+            <li>Smooth scrolling between sections</li>
+            <li>Automatic active state highlighting</li>
+            <li>Responsive mobile navigation</li>
+            <li>Performance-optimized event handling</li>
+            <li>Keyboard navigation support</li>
+            <li>Touch-friendly mobile interface</li>
+          </ul>
+
+          <h2>Technical Implementation</h2>
+          <ul>
+            <li>Event delegation for efficient handling</li>
+            <li>Debounced scroll and resize events</li>
+            <li>Mobile-first responsive design</li>
+            <li>Cross-browser compatibility</li>
+            <li>Accessibility compliance</li>
+          </ul>
         </section>
 
         <section id="search" class="doc-section">
@@ -140,6 +383,139 @@
             <li>Matches command names and descriptions</li>
             <li>Case-insensitive search</li>
           </ul>
+
+          <h2>Search Component Structure</h2>
+          <p>The search functionality is built with a comprehensive component-based approach:</p>
+          
+          <pre><code class="language-javascript">
+const SearchComponent = {
+    searchInput: document.querySelector('.search-input'),
+    searchResults: document.querySelector('.search-results'),
+    searchOverlay: document.querySelector('.search-overlay'),
+    clearButton: document.querySelector('.clear-search'),
+    searchIndex: [],
+    minSearchLength: 2,
+    maxResults: 10
+};
+          </code></pre>
+
+          <h2>Search Index Building</h2>
+          <p>An efficient search index is created for optimal performance:</p>
+          
+          <pre><code class="language-javascript">
+const buildSearchIndex = () => {
+    const contentElements = document.querySelectorAll('.searchable-content');
+    
+    contentElements.forEach(element => {
+        SearchComponent.searchIndex.push({
+            id: element.id,
+            title: element.getAttribute('data-title'),
+            content: element.textContent.toLowerCase(),
+            tags: element.getAttribute('data-tags')?.split(',') || [],
+            type: element.getAttribute('data-type')
+        });
+    });
+};
+          </code></pre>
+
+          <h2>Real-time Search Implementation</h2>
+          <p>Search is performed in real-time with debouncing for performance:</p>
+          
+          <pre><code class="language-javascript">
+const performSearch = (query) => {
+    if (query.length < SearchComponent.minSearchLength) {
+        hideResults();
+        return;
+    }
+
+    const results = SearchComponent.searchIndex
+        .filter(item => matchesSearch(item, query))
+        .slice(0, SearchComponent.maxResults);
+
+    displayResults(results);
+};
+
+const matchesSearch = (item, query) => {
+    const searchTerm = query.toLowerCase();
+    return (
+        item.title.toLowerCase().includes(searchTerm) ||
+        item.content.includes(searchTerm) ||
+        item.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+    );
+};
+          </code></pre>
+
+          <h2>Search Result Display</h2>
+          <p>Results are displayed with highlighting and rich formatting:</p>
+          
+          <pre><code class="language-javascript">
+const displayResults = (results) => {
+    if (!results.length) {
+        showNoResults();
+        return;
+    }
+
+    const resultHTML = results.map(result => `
+        <div class="search-result-item" data-id="${result.id}">
+            <h3 class="result-title">${highlightMatch(result.title)}</h3>
+            <p class="result-preview">${generatePreview(result.content)}</p>
+            ${result.tags.length ? `
+                <div class="result-tags">
+                    ${result.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                </div>
+            ` : ''}
+        </div>
+    `).join('');
+
+    SearchComponent.searchResults.innerHTML = resultHTML;
+    showResults();
+};
+          </code></pre>
+
+          <h2>Search Optimization</h2>
+          <p>Advanced optimization techniques ensure fast and relevant results:</p>
+          
+          <pre><code class="language-javascript">
+const optimizeSearch = {
+    tokenize(text) {
+        return text.toLowerCase()
+            .split(/\s+/)
+            .filter(token => token.length >= 2);
+    },
+
+    calculateRelevance(item, query) {
+        const searchableText = this.createSearchableText(item);
+        const queryTokens = this.tokenize(query);
+        
+        return queryTokens.reduce((score, token) => {
+            if (item.title.toLowerCase().includes(token)) score += 3;
+            if (item.tags.some(tag => tag.toLowerCase().includes(token))) score += 2;
+            if (searchableText.includes(token)) score += 1;
+            return score;
+        }, 0);
+    }
+};
+          </code></pre>
+
+          <h2>Key Features</h2>
+          <ul>
+            <li>Real-time search with instant results</li>
+            <li>Advanced relevance scoring</li>
+            <li>Rich result highlighting</li>
+            <li>Tag-based filtering</li>
+            <li>Keyboard navigation support</li>
+            <li>Mobile-optimized interface</li>
+          </ul>
+
+          <h2>Technical Implementation</h2>
+          <ul>
+            <li>Efficient search indexing</li>
+            <li>Debounced search execution</li>
+            <li>Optimized DOM updates</li>
+            <li>Cross-browser compatibility</li>
+            <li>Accessibility compliance</li>
+            <li>Performance optimization</li>
+          </ul>
         </section>
 
         <section id="theme" class="doc-section">
@@ -157,6 +533,170 @@
             <li>Optimized colors for both themes</li>
             <li>Smooth transition animations</li>
           </ul>
+
+          <h2>Theme Configuration</h2>
+          <p>The theme system is built with a comprehensive configuration setup:</p>
+          
+          <pre><code class="language-javascript">
+const ThemeManager = {
+    themes: {
+        light: 'light-theme',
+        dark: 'dark-theme'
+    },
+    storageKey: 'preferred-theme',
+    defaultTheme: 'light',
+    transitionDuration: 300,
+    mediaQuery: window.matchMedia('(prefers-color-scheme: dark)')
+};
+          </code></pre>
+
+          <h2>Theme Initialization</h2>
+          <p>The theme system initializes with user and system preferences:</p>
+          
+          <pre><code class="language-javascript">
+const initializeTheme = () => {
+    const savedTheme = localStorage.getItem(ThemeManager.storageKey);
+    const systemPreference = ThemeManager.mediaQuery.matches ? 'dark' : 'light';
+    const initialTheme = savedTheme || systemPreference;
+    
+    applyTheme(initialTheme);
+    setupThemeListeners();
+    updateThemeToggle(initialTheme);
+};
+          </code></pre>
+
+          <h2>Theme Toggle Implementation</h2>
+          <p>The theme toggle button is implemented with accessibility support:</p>
+          
+          <pre><code class="language-javascript">
+const ThemeToggle = {
+    button: document.querySelector('.theme-toggle'),
+    
+    initialize() {
+        this.button.addEventListener('click', this.handleClick.bind(this));
+        this.updateAriaLabel(getCurrentTheme());
+    },
+    
+    handleClick() {
+        const currentTheme = getCurrentTheme();
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        switchTheme(newTheme);
+    },
+    
+    updateAriaLabel(theme) {
+        const nextTheme = theme === 'light' ? 'dark' : 'light';
+        this.button.setAttribute('aria-label', `Switch to ${nextTheme} theme`);
+    }
+};
+          </code></pre>
+
+          <h2>Theme Switching Logic</h2>
+          <p>Smooth theme transitions are handled with careful state management:</p>
+          
+          <pre><code class="language-javascript">
+const switchTheme = (newTheme) => {
+    const root = document.documentElement;
+    const oldTheme = getCurrentTheme();
+    
+    // Prepare for transition
+    root.classList.add('theme-transitioning');
+    
+    // Switch theme classes
+    root.classList.remove(ThemeManager.themes[oldTheme]);
+    root.classList.add(ThemeManager.themes[newTheme]);
+    
+    // Complete transition
+    setTimeout(() => {
+        root.classList.remove('theme-transitioning');
+    }, ThemeManager.transitionDuration);
+    
+    // Update state and UI
+    saveThemePreference(newTheme);
+    updateThemeToggle(newTheme);
+};
+          </code></pre>
+
+          <h2>System Preference Detection</h2>
+          <p>The theme system automatically responds to system preferences:</p>
+          
+          <pre><code class="language-javascript">
+const handleSystemPreference = () => {
+    ThemeManager.mediaQuery.addEventListener('change', (e) => {
+        if (!localStorage.getItem(ThemeManager.storageKey)) {
+            const newTheme = e.matches ? 'dark' : 'light';
+            applyTheme(newTheme);
+        }
+    });
+};
+          </code></pre>
+
+          <h2>Theme Styles Management</h2>
+          <p>Theme-specific styles are managed through CSS variables:</p>
+          
+          <pre><code class="language-javascript">
+const ThemeStyles = {
+    variables: {
+        light: {
+            '--background-color': '#ffffff',
+            '--text-color': '#333333',
+            '--primary-color': '#007bff'
+        },
+        dark: {
+            '--background-color': '#1a1a1a',
+            '--text-color': '#ffffff',
+            '--primary-color': '#4dabf7'
+        }
+    },
+    
+    apply(theme) {
+        const root = document.documentElement;
+        const variables = this.variables[theme];
+        
+        Object.entries(variables).forEach(([property, value]) => {
+            root.style.setProperty(property, value);
+        });
+    }
+};
+          </code></pre>
+
+          <h2>Theme Persistence</h2>
+          <p>User theme preferences are saved and restored:</p>
+          
+          <pre><code class="language-javascript">
+const ThemeStorage = {
+    save(theme) {
+        localStorage.setItem(ThemeManager.storageKey, theme);
+    },
+    
+    load() {
+        return localStorage.getItem(ThemeManager.storageKey);
+    },
+    
+    clear() {
+        localStorage.removeItem(ThemeManager.storageKey);
+    }
+};
+          </code></pre>
+
+          <h2>Key Features</h2>
+          <ul>
+            <li>Seamless theme switching</li>
+            <li>System preference integration</li>
+            <li>Persistent user preferences</li>
+            <li>Smooth transition effects</li>
+            <li>Accessible theme toggle</li>
+            <li>Cross-browser support</li>
+          </ul>
+
+          <h2>Technical Implementation</h2>
+          <ul>
+            <li>CSS variable-based theming</li>
+            <li>Local storage persistence</li>
+            <li>Media query detection</li>
+            <li>Transition management</li>
+            <li>Event delegation</li>
+            <li>Performance optimization</li>
+          </ul>
         </section>
 
         <section id="utils" class="doc-section">
@@ -173,6 +713,237 @@
             <li>Responsive design</li>
             <li>Touch-friendly interface</li>
             <li>Mobile-optimized navigation</li>
+          </ul>
+
+          <h2>Performance Utilities</h2>
+          <p>Core performance optimization functions for handling events and calculations:</p>
+          
+          <pre><code class="language-javascript">
+const PerformanceUtils = {
+    debounce(func, wait, immediate = false) {
+        let timeout;
+        return function executedFunction(...args) {
+            const context = this;
+            const later = () => {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            const callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    },
+
+    throttle(func, limit) {
+        let inThrottle;
+        return function executedFunction(...args) {
+            if (!inThrottle) {
+                func.apply(this, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    }
+};
+          </code></pre>
+
+          <h2>DOM Manipulation Utilities</h2>
+          <p>Enhanced element creation and manipulation functions:</p>
+          
+          <pre><code class="language-javascript">
+const DOMUtils = {
+    createElement(tag, options = {}) {
+        const {
+            attributes = {},
+            styles = {},
+            children = [],
+            events = {},
+            dataset = {},
+            className = '',
+            id = ''
+        } = options;
+
+        const element = document.createElement(tag);
+
+        // Set attributes and properties
+        Object.entries(attributes).forEach(([key, value]) => {
+            element.setAttribute(key, value);
+        });
+
+        Object.entries(styles).forEach(([property, value]) => {
+            element.style[property] = value;
+        });
+
+        if (className) element.className = className;
+        if (id) element.id = id;
+
+        // Add event listeners and children
+        Object.entries(events).forEach(([event, handler]) => {
+            element.addEventListener(event, handler);
+        });
+
+        children.forEach(child => {
+            if (typeof child === 'string') {
+                element.appendChild(document.createTextNode(child));
+            } else {
+                element.appendChild(child);
+            }
+        });
+
+        return element;
+    }
+};
+          </code></pre>
+
+          <h2>Validation Utilities</h2>
+          <p>Comprehensive validation system for form inputs and data:</p>
+          
+          <pre><code class="language-javascript">
+const ValidationUtils = {
+    rules: {
+        required: value => value !== undefined && value !== null && value !== '',
+        email: value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+        url: value => {
+            try {
+                new URL(value);
+                return true;
+            } catch {
+                return false;
+            }
+        },
+        minLength: (value, min) => String(value).length >= min,
+        maxLength: (value, max) => String(value).length <= max,
+        pattern: (value, pattern) => pattern.test(value)
+    },
+
+    validate(value, validations) {
+        const errors = [];
+        Object.entries(validations).forEach(([rule, ruleValue]) => {
+            if (this.rules[rule] && !this.rules[rule](value, ruleValue)) {
+                errors.push({
+                    rule,
+                    value,
+                    message: this.getErrorMessage(rule, ruleValue)
+                });
+            }
+        });
+        return { isValid: errors.length === 0, errors };
+    }
+};
+          </code></pre>
+
+          <h2>Async Utilities</h2>
+          <p>Helper functions for handling asynchronous operations:</p>
+          
+          <pre><code class="language-javascript">
+const AsyncUtils = {
+    retry(fn, retries = 3, delay = 1000) {
+        return new Promise((resolve, reject) => {
+            const attempt = async (attemptsLeft) => {
+                try {
+                    const result = await fn();
+                    resolve(result);
+                } catch (error) {
+                    if (attemptsLeft <= 1) {
+                        reject(error);
+                        return;
+                    }
+                    setTimeout(() => attempt(attemptsLeft - 1), delay);
+                }
+            };
+            attempt(retries);
+        });
+    },
+
+    timeout(promise, ms) {
+        const timeoutPromise = new Promise((_, reject) => {
+            setTimeout(() => reject(new Error('Operation timed out')), ms);
+        });
+        return Promise.race([promise, timeoutPromise]);
+    }
+};
+          </code></pre>
+
+          <h2>Browser Compatibility</h2>
+          <p>Feature detection and browser compatibility utilities:</p>
+          
+          <pre><code class="language-javascript">
+const BrowserUtils = {
+    supports: {
+        localStorage: () => {
+            try {
+                localStorage.setItem('test', 'test');
+                localStorage.removeItem('test');
+                return true;
+            } catch {
+                return false;
+            }
+        },
+        
+        touchEvents: () => {
+            return 'ontouchstart' in window || 
+                   navigator.maxTouchPoints > 0;
+        }
+    }
+};
+          </code></pre>
+
+          <h2>Mobile Touch Utilities</h2>
+          <p>Enhanced touch event handling for mobile devices:</p>
+          
+          <pre><code class="language-javascript">
+const TouchUtils = {
+    swipeDetect(element, callbacks) {
+        let touchstart = { x: 0, y: 0, time: 0 };
+        const threshold = { distance: 50, time: 300 };
+        
+        element.addEventListener('touchstart', (e) => {
+            const touch = e.touches[0];
+            touchstart = {
+                x: touch.clientX,
+                y: touch.clientY,
+                time: Date.now()
+            };
+        });
+
+        element.addEventListener('touchend', (e) => {
+            const touch = e.changedTouches[0];
+            const distanceX = touch.clientX - touchstart.x;
+            const distanceY = touch.clientY - touchstart.y;
+            const elapsedTime = Date.now() - touchstart.time;
+
+            if (elapsedTime <= threshold.time) {
+                if (Math.abs(distanceX) >= threshold.distance) {
+                    callbacks[distanceX > 0 ? 'right' : 'left']?.();
+                }
+                if (Math.abs(distanceY) >= threshold.distance) {
+                    callbacks[distanceY > 0 ? 'down' : 'up']?.();
+                }
+            }
+        });
+    }
+};
+          </code></pre>
+
+          <h2>Key Features</h2>
+          <ul>
+            <li>Performance optimization utilities</li>
+            <li>Enhanced DOM manipulation</li>
+            <li>Form validation system</li>
+            <li>Async operation helpers</li>
+            <li>Browser compatibility checks</li>
+            <li>Mobile touch handling</li>
+          </ul>
+
+          <h2>Technical Implementation</h2>
+          <ul>
+            <li>Modular utility functions</li>
+            <li>Efficient event handling</li>
+            <li>Comprehensive validation</li>
+            <li>Cross-browser support</li>
+            <li>Mobile optimization</li>
+            <li>Error handling</li>
           </ul>
         </section>
       </main>
