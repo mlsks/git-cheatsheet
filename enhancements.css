@@ -1,0 +1,208 @@
+/* Lazy Loading Animation */
+.command-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.command-section.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Table of Contents */
+.toc-container {
+  position: relative;
+  margin: var(--space-md) 0 var(--space-lg);
+}
+
+.toc-toggle {
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  transition: all var(--transition-normal);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.toc-toggle:hover {
+  background: var(--accent-secondary);
+}
+
+.toc-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--bg-section);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-md);
+  z-index: 100;
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toc-content.toc-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toc-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc-content li {
+  margin-bottom: var(--space-xs);
+}
+
+.toc-content a {
+  color: var(--text-primary);
+  text-decoration: none;
+  display: block;
+  padding: var(--space-xs);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-normal);
+}
+
+.toc-content a.active {
+  background: var(--accent-primary);
+  color: white;
+  font-weight: 500;
+}
+
+/* Improve navigation indicators */
+.nav-indicator {
+  position: relative;
+  background: var(--accent-primary);
+  color: white;
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  opacity: 0.16;
+  transform: translateX(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  min-width: 200px;
+  user-select: none;
+  z-index: 90; /* Lower than TOC but higher than content */
+}
+
+.nav-indicator:hover {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.nav-indicator.visible {
+  opacity: 0.8;
+  transform: translateX(0);
+}
+
+/* Command Categories */
+.command-section[data-category="basic"] .command {
+  border-left: 4px solid #4caf50;
+}
+
+.command-section[data-category="branch"] .command {
+  border-left: 4px solid #ff9800;
+}
+
+.command-section[data-category="remote"] .command {
+  border-left: 4px solid #9c27b0;
+}
+
+.command-section[data-category="history"] .command {
+  border-left: 4px solid #2196f3;
+}
+
+.command-section[data-category="undo"] .command {
+  border-left: 4px solid #f44336;
+}
+
+.category-indicator {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  margin-left: 8px;
+  color: white;
+}
+
+.category-basic { background-color: #4caf50; }
+.category-branch { background-color: #ff9800; }
+.category-remote { background-color: #9c27b0; }
+.category-history { background-color: #2196f3; }
+.category-undo { background-color: #f44336; }
+
+/* Interactive Examples */
+.interactive-example {
+  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin: var(--space-md) 0;
+  border: 2px solid var(--border-color);
+}
+
+.interactive-example h4 {
+  margin-top: 0;
+  margin-bottom: var(--space-sm);
+  color: var(--accent-tertiary);
+}
+
+.inputs-container {
+  margin-bottom: var(--space-sm);
+}
+
+.inputs-container label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  color: var(--text-secondary);
+}
+
+.inputs-container input {
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-section);
+  color: var(--text-primary);
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+  max-width: 300px;
+}
+
+.example-output-container {
+  display: flex;
+  align-items: center;
+}
+
+.example-output {
+  flex: 1;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .toc-content {
+    width: 100%;
+    max-height: 300px;
+  }
+  
+  .interactive-example {
+    padding: var(--space-sm);
+  }
+}

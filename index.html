@@ -7,9 +7,13 @@
     <meta name="keywords" content="git, commands, cheat sheet, git tutorial, version control, git basics, git guide, git reference" />
     <title>Git Commands Cheat Sheet</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="enhancements.css" />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>" />
     <!-- Add Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1976d2">
   </head>
   <body class="theme-blue">
     <div class="button-wrapper">
@@ -40,7 +44,14 @@
 
     <h1>Git Commands Cheat Sheet</h1>
 
-    <div class="command-section">
+    <div class="toc-container">
+      <button class="toc-toggle" aria-expanded="false" aria-controls="tableOfContents">
+        <i class="fas fa-list"></i> Table of Contents
+      </button>
+      <div id="tableOfContents" class="toc-content" hidden></div>
+    </div>
+
+    <div class="command-section" data-category="basic">
       <h2>Most Frequently Used Commands</h2>
 
       <div class="visual-diagram">
@@ -70,6 +81,20 @@
         <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
       </div>
 
+      <div class="interactive-example" data-template="git commit -m '{message}'">
+        <h4>Try it yourself:</h4>
+        <div class="inputs-container">
+          <label>
+            Commit message:
+            <input type="text" name="message" value="Initial commit">
+          </label>
+        </div>
+        <div class="example-output-container">
+          <div class="example-output command"></div>
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
+      </div>
+
       <div class="command">git commit -am "message"</div>
       <div class="description">Stage and commit all tracked files with a message (combines git add and commit for modified files)
         <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
@@ -86,7 +111,7 @@
       </div>
     </div>
 
-    <div class="command-section">
+    <div class="command-section" data-category="basic">
       <h2>Repository Setup</h2>
 
       <div class="command">git init</div>
@@ -100,7 +125,7 @@
       </div>
     </div>
 
-    <div class="command-section">
+    <div class="command-section" data-category="branch">
       <h2>Branch Operations</h2>
 
       <div class="visual-diagram">
@@ -131,6 +156,20 @@
         <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
       </div>
 
+      <div class="interactive-example" data-template="git checkout {branch}">
+        <h4>Try it yourself:</h4>
+        <div class="inputs-container">
+          <label>
+            Branch name:
+            <input type="text" name="branch" value="main">
+          </label>
+        </div>
+        <div class="example-output-container">
+          <div class="example-output command"></div>
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
+      </div>
+
       <div class="command">git checkout -b [branch-name]</div>
       <div class="description">Create and switch to new branch (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Create Branch")
         <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
@@ -142,7 +181,7 @@
       </div>
     </div>
 
-    <div class="command-section">
+    <div class="command-section" data-category="history">
       <h2>History and Differences</h2>
 
       <div class="command">git log</div>
@@ -163,7 +202,7 @@
       </div>
     </div>
 
-    <div class="command-section">
+    <div class="command-section" data-category="undo">
       <h2>Undoing Changes</h2>
 
       <div class="command">git reset [file]</div>
@@ -184,7 +223,7 @@
       </div>
     </div>
 
-    <div class="command-section">
+    <div class="command-section" data-category="remote">
       <h2>Remote Repository</h2>
 
       <div class="command">git remote add origin [url]</div>
@@ -204,7 +243,7 @@
       </div>
     </div>
 
-    <div class="command-section">
+    <div class="command-section" data-category="basic">
       <h2>Stashing</h2>
 
       <div class="visual-diagram">
@@ -234,7 +273,7 @@
       </div>
     </div>
 
-    <div class="command-section">
+    <div class="command-section" data-category="basic">
       <h2>Tags</h2>
 
       <div class="command">git tag</div>
@@ -253,7 +292,7 @@
       </div>
     </div>
 
-    <div class="command-section">
+    <div class="command-section" data-category="history">
       <h2>Advanced Log</h2>
 
       <div class="command">git log --graph --oneline --decorate</div>
@@ -272,7 +311,7 @@
       </div>
     </div>
 
-    <div class="command-section">
+    <div class="command-section" data-category="basic">
       <h2>Configuration</h2>
 
       <div class="command">git config --global user.name "[name]"</div>
@@ -291,7 +330,7 @@
       </div>
     </div>
 
-    <div class="command-section">
+    <div class="command-section" data-category="undo">
       <h2>Advanced Reset</h2>
 
       <div class="visual-diagram">
@@ -328,6 +367,11 @@
     <script src="js/search.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/clipboard.js"></script>
+    <script src="js/errorHandling.js"></script>
+    <script src="js/lazyLoading.js"></script>
+    <script src="js/tableOfContents.js"></script>
+    <script src="js/commandNavigation.js"></script>
+    <script src="js/interactiveExamples.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
