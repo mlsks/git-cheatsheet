@@ -1,0 +1,115 @@
+/* Google Chrome-like Search Enhancements */
+
+/* Search Hidden Elements - Override any inline styles */
+.search-hidden {
+  display: none !important;
+}
+
+/* Increase search wrapper width to accommodate navigation buttons */
+.search-wrapper.expanded {
+  width: 400px !important;
+}
+
+/* Search match highlighting */
+.search-match {
+  background-color: rgba(255, 255, 0, 0.4);
+  border-radius: 2px;
+  padding: 0 2px;
+  margin: 0 -2px;
+}
+
+.search-match-active {
+  background-color: rgba(255, 165, 0, 0.6);
+  border: 1px solid #ff8c00;
+  padding: 0 1px;
+  margin: 0 -1px;
+}
+
+/* Search navigation buttons */
+.search-nav-buttons {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+  border-left: 1px solid var(--border-color);
+  padding-left: 8px;
+}
+
+.search-nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+}
+
+.search-nav-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--accent-primary);
+}
+
+.match-counter {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0 8px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.match-counter.no-matches {
+  color: #f44336;
+}
+
+/* Dark mode adjustments for search */
+[data-theme="dark"] .search-match {
+  background-color: rgba(255, 255, 0, 0.3);
+}
+
+[data-theme="dark"] .search-match-active {
+  background-color: rgba(255, 165, 0, 0.5);
+  border-color: #ff8c00;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .search-wrapper.expanded {
+    width: calc(100vw - 60px) !important;
+    max-width: 400px !important;
+  }
+  
+  .search-nav-buttons {
+    margin-left: 4px;
+    padding-left: 4px;
+  }
+  
+  .search-nav-btn {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .match-counter {
+    min-width: 30px;
+    font-size: 0.7rem;
+  }
+}
+
+/* Small screens adjustments */
+@media (max-width: 480px) {
+  .search-wrapper.expanded {
+    width: calc(100vw - 40px) !important;
+  }
+  
+  #searchInput {
+    font-size: 0.9rem;
+  }
+  
+  .search-nav-buttons {
+    padding-left: 2px;
+    margin-left: 2px;
+  }
+}
