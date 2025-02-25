@@ -52,6 +52,17 @@ class Navigation {
       this.updateNavigationIndicators();
     });
 
+    // Listen for clicks on sidebar navigation
+    const sidebarLinks = document.querySelectorAll('.doc-nav a');
+    if (sidebarLinks.length > 0) {
+      sidebarLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          // Update indicators after a short delay to allow scrolling to complete
+          setTimeout(() => this.updateNavigationIndicators(), 100);
+        });
+      });
+    }
+
     // Initial update
     this.updateNavigationIndicators();
   }

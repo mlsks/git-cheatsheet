@@ -3,22 +3,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Documentation for the Git Commands Cheat Sheet application" />
+    <meta name="keywords" content="git, commands, documentation, guide, reference" />
     <title>Documentation</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="documentation.css" />
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1976d2">
+    <style>
+      .button-wrapper {
+        width: 220px;
+        height: 60px;
+      }
+      .theme-toggle {
+        width: 60px !important;
+        height: 60px !important;
+      }
+    </style>
   </head>
   <body class="theme-blue">
-    <a href="index.html" class="back-link" aria-label="Back to home">◀</a>
-    <button
-      class="theme-toggle"
-      onclick="toggleTheme()"
-      aria-label="Toggle dark mode"
-    >
-      🌙
-    </button>
+    <header role="banner">
+      <h1>Git Commands Cheat Sheet Documentation</h1>
+      <div class="button-wrapper">
+        <a href="index.html" class="help-button" aria-label="Back to home"><i class="fas fa-arrow-left"></i></a>
+        <div class="search-container">
+          <button id="searchToggle" aria-label="Toggle search"><i class="fas fa-search"></i></button>
+          <div class="search-wrapper">
+            <input type="text" id="searchInput" placeholder="Search documentation..." aria-label="Search documentation">
+            <button id="clearSearch" aria-label="Clear search"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">🌙</button>
+      </div>
+    </header>
+    
+    <button class="back-to-top" onclick="scrollToTop()" aria-label="Scroll to top">↑</button>
+
+    <nav class="section-nav" aria-label="Section navigation">
+      <div class="nav-indicator prev">
+        <span class="arrow">↑</span>
+        <span class="section-name"></span>
+        <span class="key-hint">PgUp</span>
+      </div>
+      <div class="nav-indicator next">
+        <span class="arrow">↓</span>
+        <span class="section-name"></span>
+        <span class="key-hint">PgDn</span>
+      </div>
+    </nav>
+    
     <div class="doc-container">
-      <nav class="doc-sidebar">
+      <nav class="doc-sidebar" role="navigation" aria-label="Documentation navigation">
         <ul class="doc-nav">
           <li><a href="#index" class="active">Overview Explanation</a></li>
           <li><a href="#main">Main Features</a></li>
@@ -30,11 +69,11 @@
         </ul>
       </nav>
 
-      <main class="doc-content">
-        <button class="menu-toggle" style="display: none">☰</button>
+      <main class="doc-content" role="main">
+        <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="doc-sidebar">☰</button>
 
-        <section id="index" class="doc-section active">
-          <h1>Git Commands Cheat Sheet Documentation</h1>
+        <section id="index" class="doc-section active" aria-labelledby="doc-title">
+          <h1 id="doc-title">Git Commands Cheat Sheet Documentation</h1>
           <p>
             Welcome to the documentation for the Git Commands Cheat Sheet. This
             guide will help you understand how to use the application
@@ -71,8 +110,8 @@
           
         </section>
 
-        <section id="main" class="doc-section">
-            <h1>Main.js Code Explanation</h1>
+        <section id="main" class="doc-section" aria-labelledby="main-title">
+            <h1 id="main-title">Main.js Code Explanation</h1>
             <h2>Overview</h2>
             <p>The main.js file serves as the primary entry point for the application&#39;s JavaScript functionality. It orchestrates the initialization of various features, manages global state, and coordinates between different modules of the application.</p>
             <h2>Code Structure and Functionality</h2>
@@ -373,8 +412,8 @@
             </ol>
         </section>
 
-        <section id="clipboard" class="doc-section">
-            <h1>Clipboard.js Code Explanation</h1>
+        <section id="clipboard" class="doc-section" aria-labelledby="clipboard-title">
+            <h1 id="clipboard-title">Clipboard.js Code Explanation</h1>
             <h2>Overview</h2>
             <p>The clipboard.js file implements functionality for copying text to the user&#39;s clipboard. This is a crucial feature for any documentation or code-sharing platform, allowing users to easily copy code snippets, commands, or text blocks.</p>
             <h2>Code Structure and Functionality</h2>
@@ -499,8 +538,8 @@
             
         </section>
 
-        <section id="navigation" class="doc-section">
-            <h1>Navigation.js Code Explanation</h1>
+        <section id="navigation" class="doc-section" aria-labelledby="navigation-title">
+            <h1 id="navigation-title">Navigation.js Code Explanation</h1>
             <h2>Overview</h2>
             <p>The navigation.js file manages the website&#39;s navigation system, handling both desktop and mobile navigation interactions, smooth scrolling, active state management, and responsive behavior. It&#39;s crucial for providing a seamless user experience across different devices and screen sizes.</p>
             <h2>Code Structure and Functionality</h2>
@@ -823,8 +862,8 @@
             </ol>
         </section>
 
-        <section id="search" class="doc-section">
-            <h1>Search.js Code Explanation</h1>
+        <section id="search" class="doc-section" aria-labelledby="search-title">
+            <h1 id="search-title">Search.js Code Explanation</h1>
             <h2>Overview</h2>
             <p>The search.js file implements the website&#39;s search functionality, providing real-time search capabilities, result filtering, and an optimized search experience. It handles user input, search result display, and various search-related interactions across the application.</p>
             <h2>Code Structure and Functionality</h2>
@@ -1160,8 +1199,8 @@
             </ol>
         </section>
 
-        <section id="theme" class="doc-section">
-            <h1>Theme.js Code Explanation</h1>
+        <section id="theme" class="doc-section" aria-labelledby="theme-title">
+            <h1 id="theme-title">Theme.js Code Explanation</h1>
             <h2>Overview</h2>
             <p>The theme.js file manages the website&#39;s theme system, handling dark/light mode switching, theme persistence, and dynamic styling updates. It provides a seamless theme switching experience while ensuring user preferences are maintained across sessions.</p>
             <h2>Code Structure and Functionality</h2>
@@ -1490,8 +1529,8 @@
             </ol>
         </section>
 
-        <section id="utils" class="doc-section">
-            <h1>Utils.js Code Explanation</h1>
+        <section id="utils" class="doc-section" aria-labelledby="utils-title">
+            <h1 id="utils-title">Utils.js Code Explanation</h1>
             <h2>Overview</h2>
             <p>The utils.js file serves as a comprehensive utility library that provides a collection of helper functions, common operations, and shared functionality used throughout the application. This modular approach to common functionality promotes code reuse, maintains consistency, and reduces redundancy across the codebase.</p>
             <h2>Core Utility Categories</h2>
@@ -2184,7 +2223,17 @@
       </main>
     </div>
 
+    <footer role="contentinfo">
+      <p>Git Commands Cheat Sheet Documentation - A comprehensive guide to the application</p>
+    </footer>
+
+    <script src="js/utils.js"></script>
     <script src="js/theme.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/clipboard.js"></script>
+    <script src="js/errorHandling.js"></script>
+    <script src="js/tableOfContents.js"></script>
+    <script src="js/docSearch.js"></script>
     <script src="js/documentation.js"></script>
   </body>
 </html>

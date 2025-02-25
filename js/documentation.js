@@ -17,10 +17,23 @@ document.addEventListener("DOMContentLoaded", function () {
       document.querySelectorAll(".doc-section").forEach((section) => {
         section.classList.remove("active");
       });
-      document.querySelector(`#${targetId}`).classList.add("active");
-
-      navLinks.forEach((l) => l.classList.remove("active"));
-      link.classList.add("active");
+      
+      const targetSection = document.getElementById(targetId);
+      if (targetSection) {
+        targetSection.classList.add("active");
+        
+        navLinks.forEach((l) => l.classList.remove("active"));
+        link.classList.add("active");
+        
+        // Scroll to the section
+        const headerHeight = 20; // Adjust based on your header height
+        const targetPosition = targetSection.getBoundingClientRect().top + window.scrollY - headerHeight;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth"
+        });
+      }
 
       // Close mobile menu
       if (window.innerWidth <= 768) {

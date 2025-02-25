@@ -16,20 +16,24 @@
     <meta name="theme-color" content="#1976d2">
   </head>
   <body class="theme-blue">
-    <div class="button-wrapper">
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">🌙</button>
-      <div class="search-container">
-        <button id="searchToggle" aria-label="Toggle search"><i class="fas fa-search"></i></button>
-        <div class="search-wrapper">
-          <input type="text" id="searchInput" placeholder="Search commands..." aria-label="Search git commands">
-          <button id="clearSearch" aria-label="Clear search"><i class="fas fa-times"></i></button>
+    <header role="banner">
+      <h1>Git Commands Cheat Sheet</h1>
+      <div class="button-wrapper">
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">🌙</button>
+        <div class="search-container">
+          <button id="searchToggle" aria-label="Toggle search"><i class="fas fa-search"></i></button>
+          <div class="search-wrapper">
+            <input type="text" id="searchInput" placeholder="Search commands..." aria-label="Search git commands">
+            <button id="clearSearch" aria-label="Clear search"><i class="fas fa-times"></i></button>
+          </div>
         </div>
+        <a href="documentation.html" class="help-button" aria-label="Open documentation">?</a>
       </div>
-      <a href="documentation.html" class="help-button" aria-label="Open documentation">?</a>
-    </div>
+    </header>
+    
     <button class="back-to-top" onclick="scrollToTop()" aria-label="Scroll to top">↑</button>
 
-    <div class="section-nav" aria-label="Section navigation">
+    <nav class="section-nav" aria-label="Section navigation">
       <div class="nav-indicator prev">
         <span class="arrow">↑</span>
         <span class="section-name"></span>
@@ -40,30 +44,29 @@
         <span class="section-name"></span>
         <span class="key-hint">PgDn</span>
       </div>
-    </div>
+    </nav>
 
-    <h1>Git Commands Cheat Sheet</h1>
-
-    <div class="toc-container">
+    <nav class="toc-container" aria-label="Table of contents">
       <button class="toc-toggle" aria-expanded="false" aria-controls="tableOfContents">
         <i class="fas fa-list"></i> Table of Contents
       </button>
       <div id="tableOfContents" class="toc-content" hidden></div>
-    </div>
+    </nav>
 
-    <div class="command-section" data-category="basic">
-      <h2>Most Frequently Used Commands</h2>
+    <main role="main">
+      <section class="command-section" data-category="basic" aria-labelledby="most-used-commands">
+        <h2 id="most-used-commands">Most Frequently Used Commands</h2>
 
-      <div class="visual-diagram">
-        <pre class="ascii-art">
+        <figure class="visual-diagram">
+          <pre class="ascii-art">
    Working Directory    Staging Area    Local Repository    Remote Repository
           ↓                 ↓                 ↓                   ↓
      [Modified Files] → [Staged Files] → [Committed Files] → [Remote Files]
           ↑                 ↑                 ↑                   ↑
       git status          git add .       git commit -m       git push/pull
-        </pre>
-        <div class="diagram-description">Basic Git Workflow</div>
-      </div>
+          </pre>
+          <figcaption class="diagram-description">Basic Git Workflow</figcaption>
+        </figure>
 
       <h3>Basic Commands</h3>
       <div class="command">git status</div>
@@ -109,27 +112,27 @@
       <div class="description">Push commits to remote repository (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Push")
         <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
       </div>
-    </div>
+      </section>
 
-    <div class="command-section" data-category="basic">
-      <h2>Repository Setup</h2>
+      <section class="command-section" data-category="basic" aria-labelledby="repository-setup">
+        <h2 id="repository-setup">Repository Setup</h2>
 
-      <div class="command">git init</div>
-      <div class="description">Initialize a new Git repository (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Initialize Repository")
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
+        <div class="command">git init</div>
+        <div class="description">Initialize a new Git repository (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Initialize Repository")
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
 
-      <div class="command">git clone [url]</div>
-      <div class="description">Clone a repository from remote source (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Clone")
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
-    </div>
+        <div class="command">git clone [url]</div>
+        <div class="description">Clone a repository from remote source (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Clone")
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
+      </section>
 
-    <div class="command-section" data-category="branch">
-      <h2>Branch Operations</h2>
+      <section class="command-section" data-category="branch" aria-labelledby="branch-operations">
+        <h2 id="branch-operations">Branch Operations</h2>
 
-      <div class="visual-diagram">
-        <pre class="ascii-art">
+        <figure class="visual-diagram">
+          <pre class="ascii-art">
           main
            ↓
     o---o---o---o      ← Current Timeline
@@ -137,9 +140,9 @@
              o---o     ← Feature Branch
                  ↑
               feature
-        </pre>
-        <div class="diagram-description">Branch Visualization</div>
-      </div>
+          </pre>
+          <figcaption class="diagram-description">Branch Visualization</figcaption>
+        </figure>
 
       <div class="command">git branch</div>
       <div class="description">List all local branches (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Branch")
@@ -179,83 +182,83 @@
       <div class="description">Merge specified branch into current branch (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Merge Branch")
         <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
       </div>
-    </div>
+      </section>
 
-    <div class="command-section" data-category="history">
-      <h2>History and Differences</h2>
+      <section class="command-section" data-category="history" aria-labelledby="history-differences">
+        <h2 id="history-differences">History and Differences</h2>
 
-      <div class="command">git log</div>
-      <div class="description">View commit history (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: View History")
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
+        <div class="command">git log</div>
+        <div class="description">View commit history (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: View History")
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
 
-      <div class="command">git diff</div>
-      <div class="description">
-        Show changes between working directory and staging area (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Open Changes")
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
+        <div class="command">git diff</div>
+        <div class="description">
+          Show changes between working directory and staging area (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Open Changes")
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
 
-      <div class="command">git diff --staged</div>
-      <div class="description">
-        Show changes between staging area and last commit (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Open Changes")
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
-    </div>
+        <div class="command">git diff --staged</div>
+        <div class="description">
+          Show changes between staging area and last commit (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Open Changes")
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
+      </section>
 
-    <div class="command-section" data-category="undo">
-      <h2>Undoing Changes</h2>
+      <section class="command-section" data-category="undo" aria-labelledby="undoing-changes">
+        <h2 id="undoing-changes">Undoing Changes</h2>
 
-      <div class="command">git reset [file]</div>
-      <div class="description">
-        Unstage changes while preserving working directory (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Unstage")
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
+        <div class="command">git reset [file]</div>
+        <div class="description">
+          Unstage changes while preserving working directory (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Unstage")
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
 
-      <div class="command">git checkout -- [file]</div>
-      <div class="description">Discard changes in working directory (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Discard Changes")
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
+        <div class="command">git checkout -- [file]</div>
+        <div class="description">Discard changes in working directory (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Discard Changes")
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
 
-      <div class="command">git revert [commit]</div>
-      <div class="description">
-        Create new commit that undoes changes from specified commit (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Revert Commit")
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
-    </div>
+        <div class="command">git revert [commit]</div>
+        <div class="description">
+          Create new commit that undoes changes from specified commit (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Revert Commit")
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
+      </section>
 
-    <div class="command-section" data-category="remote">
-      <h2>Remote Repository</h2>
+      <section class="command-section" data-category="remote" aria-labelledby="remote-repository">
+        <h2 id="remote-repository">Remote Repository</h2>
 
-      <div class="command">git remote add origin [url]</div>
-      <div class="description">Add remote repository (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Add Remote")
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
+        <div class="command">git remote add origin [url]</div>
+        <div class="description">Add remote repository (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Add Remote")
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
 
-      <div class="command">git remote -v</div>
-      <div class="description">List remote repositories (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Remote")
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
+        <div class="command">git remote -v</div>
+        <div class="description">List remote repositories (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Remote")
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
 
-      <div class="command">git fetch</div>
-      <div class="description">
-        Download objects and refs from remote repository (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Fetch")
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
-    </div>
+        <div class="command">git fetch</div>
+        <div class="description">
+          Download objects and refs from remote repository (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Fetch")
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
+      </section>
 
-    <div class="command-section" data-category="basic">
-      <h2>Stashing</h2>
+      <section class="command-section" data-category="basic" aria-labelledby="stashing">
+        <h2 id="stashing">Stashing</h2>
 
-      <div class="visual-diagram">
-        <pre class="ascii-art">
+        <figure class="visual-diagram">
+          <pre class="ascii-art">
     Working Directory          Stash Stack
            ↓                      ↓
     [Modified Files]   →   [Stash@{0}] Newest
                           [Stash@{1}]
                           [Stash@{2}] Oldest
-        </pre>
-        <div class="diagram-description">Git Stash Stack Visualization</div>
-      </div>
+          </pre>
+          <figcaption class="diagram-description">Git Stash Stack Visualization</figcaption>
+        </figure>
 
       <div class="command">git stash</div>
       <div class="description">Temporarily store modified tracked files (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Stash")
@@ -271,70 +274,70 @@
       <div class="description">List all stashed changesets (<span class="shortcut">Ctrl+Shift+P</span> then type "Git: Show Stash")
         <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
       </div>
-    </div>
+      </section>
 
-    <div class="command-section" data-category="basic">
-      <h2>Tags</h2>
+      <section class="command-section" data-category="basic" aria-labelledby="tags">
+        <h2 id="tags">Tags</h2>
 
-      <div class="command">git tag</div>
-      <div class="description">List all tags
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
+        <div class="command">git tag</div>
+        <div class="description">List all tags
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
 
-      <div class="command">git tag -a v1.0.0 -m "message"</div>
-      <div class="description">Create an annotated tag
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
+        <div class="command">git tag -a v1.0.0 -m "message"</div>
+        <div class="description">Create an annotated tag
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
 
-      <div class="command">git push origin --tags</div>
-      <div class="description">Push all tags to remote repository
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
-    </div>
+        <div class="command">git push origin --tags</div>
+        <div class="description">Push all tags to remote repository
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
+      </section>
 
-    <div class="command-section" data-category="history">
-      <h2>Advanced Log</h2>
+      <section class="command-section" data-category="history" aria-labelledby="advanced-log">
+        <h2 id="advanced-log">Advanced Log</h2>
 
-      <div class="command">git log --graph --oneline --decorate</div>
-      <div class="description">View commit history as a graph
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
+        <div class="command">git log --graph --oneline --decorate</div>
+        <div class="description">View commit history as a graph
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
 
-      <div class="command">git log -p [file]</div>
-      <div class="description">Show changes over time for a specific file
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
+        <div class="command">git log -p [file]</div>
+        <div class="description">Show changes over time for a specific file
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
 
-      <div class="command">git blame [file]</div>
-      <div class="description">Show who changed what and when in a file
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
-    </div>
+        <div class="command">git blame [file]</div>
+        <div class="description">Show who changed what and when in a file
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
+      </section>
 
-    <div class="command-section" data-category="basic">
-      <h2>Configuration</h2>
+      <section class="command-section" data-category="basic" aria-labelledby="configuration">
+        <h2 id="configuration">Configuration</h2>
 
-      <div class="command">git config --global user.name "[name]"</div>
-      <div class="description">Set the name you want attached to your commits
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
+        <div class="command">git config --global user.name "[name]"</div>
+        <div class="description">Set the name you want attached to your commits
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
 
-      <div class="command">git config --global user.email "[email]"</div>
-      <div class="description">Set the email you want attached to your commits
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
+        <div class="command">git config --global user.email "[email]"</div>
+        <div class="description">Set the email you want attached to your commits
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
 
-      <div class="command">git config --list</div>
-      <div class="description">List all Git configurations
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
-    </div>
+        <div class="command">git config --list</div>
+        <div class="description">List all Git configurations
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
+      </section>
 
-    <div class="command-section" data-category="undo">
-      <h2>Advanced Reset</h2>
+      <section class="command-section" data-category="undo" aria-labelledby="advanced-reset">
+        <h2 id="advanced-reset">Advanced Reset</h2>
 
-      <div class="visual-diagram">
-        <pre class="ascii-art">
+        <figure class="visual-diagram">
+          <pre class="ascii-art">
     HEAD~3    HEAD~2    HEAD~1     HEAD
       ↓         ↓         ↓         ↓
     o ← → o ← → o ← → o     Commit History
@@ -342,25 +345,30 @@
     --soft:   Move HEAD only
     --mixed:  Move HEAD and reset staging
     --hard:   Move HEAD, reset staging and working directory
-        </pre>
-        <div class="diagram-description">Git Reset Types Visualization</div>
-      </div>
+          </pre>
+          <figcaption class="diagram-description">Git Reset Types Visualization</figcaption>
+        </figure>
 
-      <div class="command">git reset --soft HEAD~1</div>
-      <div class="description">Undo last commit, keep changes staged
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
+        <div class="command">git reset --soft HEAD~1</div>
+        <div class="description">Undo last commit, keep changes staged
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
 
-      <div class="command">git reset --hard HEAD~1</div>
-      <div class="description">Undo last commit and all changes (Caution: destructive)
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
+        <div class="command">git reset --hard HEAD~1</div>
+        <div class="description">Undo last commit and all changes (Caution: destructive)
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
 
-      <div class="command">git reset --hard origin/main</div>
-      <div class="description">Reset to match remote branch exactly (Caution: destructive)
-        <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
-      </div>
-    </div>
+        <div class="command">git reset --hard origin/main</div>
+        <div class="description">Reset to match remote branch exactly (Caution: destructive)
+          <button class="copy-btn" aria-label="Copy command"><i class="fas fa-copy"></i></button>
+        </div>
+      </section>
+    </main>
+
+    <footer role="contentinfo">
+      <p>Git Commands Cheat Sheet - A comprehensive reference for Git commands</p>
+    </footer>
 
     <script src="js/utils.js"></script>
     <script src="js/theme.js"></script>
