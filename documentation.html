@@ -9,10 +9,9 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="documentation.css" />
+    <link rel="stylesheet" href="search-enhancements.css" />
     <!-- Add Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <!-- PWA Support -->
-    <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#1976d2">
     <style>
       .button-wrapper {
@@ -34,6 +33,11 @@
           <button id="searchToggle" aria-label="Toggle search"><i class="fas fa-search"></i></button>
           <div class="search-wrapper">
             <input type="text" id="searchInput" placeholder="Search documentation..." aria-label="Search documentation">
+            <div class="search-nav-buttons">
+              <div id="matchCounter" class="match-counter">0/0</div>
+              <button id="prevMatch" class="search-nav-btn prev-match" aria-label="Previous match"><i class="fas fa-chevron-up"></i></button>
+              <button id="nextMatch" class="search-nav-btn next-match" aria-label="Next match"><i class="fas fa-chevron-down"></i></button>
+            </div>
             <button id="clearSearch" aria-label="Clear search"><i class="fas fa-times"></i></button>
           </div>
         </div>
