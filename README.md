@@ -2,7 +2,7 @@
 
 A comprehensive, interactive reference guide for Git commands with a clean, responsive interface and powerful search functionality.
 
-![Git Commands Cheat Sheet Screenshot](https://github.com/mlsks/git-commands-cheatsheet/raw/main/screenshot.png)
+![Git Commands Cheat Sheet Screenshot]([https://raw.githubusercontent.com/mlsks/git-cheatsheet/refs/heads/main/screenshot.png])
 
 ## Features
 
